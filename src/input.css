@@ -1,0 +1,18 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter&display=swap");
+@import "tailwindcss";
+
+
+@theme {
+  --font-sans: "Inter", sans-serif;
+  --color-primary-50: oklch(97.91% 0.013 228.92);
+  --color-primary-100: oklch(95.74% 0.025 225.31);
+  --color-primary-200: oklch(91.36% 0.058 221.47);
+  --color-primary-300: oklch(85.4% 0.102 219.79);
+  --color-primary-400: oklch(79.79% 0.135 221.23);
+  --color-primary-500: oklch(73.48% 0.139 225.66);
+  --color-primary-600: oklch(64.05% 0.129 231.05);
+  --color-primary-700: oklch(53.83% 0.11 232.43);
+  --color-primary-800: oklch(47.49% 0.093 229.93);
+  --color-primary-900: oklch(41.56% 0.079 230.99);
+  --color-primary-950: oklch(31.08% 0.06 233.98);
+}
