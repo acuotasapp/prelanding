@@ -1,0 +1,20 @@
+---
+import Store from '../../assets/icons/store.svg'
+import Calendar from '../../assets/icons/calendar.svg'
+import Location from '../../assets/icons/location.svg'
+import EventDetail from '../atoms/EventDetail.astro'
+---
+
+<section class="contents" id="event-details">
+	<dl
+		class="grid grid-cols-[auto_1fr] gap-x-2 gap-y-1 justify-start items-center text-gray-500"
+	>
+		<EventDetail Icon={Store} label="Organizador" value="Nascar México" />
+		<EventDetail
+			Icon={Calendar}
+			label="Fechas"
+			value="13 y 14 de Septiembre del 2025"
+		/>
+		<EventDetail Icon={Location} label="Ubicación" value="Autódromo Panamá" />
+	</dl>
+</section>

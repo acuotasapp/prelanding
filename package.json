@@ -3,8 +3,9 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "build": "npx @tailwindcss/cli -i ./src/input.css -o ./assets/output.css",
-    "dev": "npx tailwindcss -i ./src/input.css -o ./assets/output.css --watch"
+    "dev": "astro dev --host",
+    "build": "astro build",
+    "preview": "astro preview"
   },
   "repository": {
     "type": "git",
@@ -19,7 +20,10 @@
   "homepage": "https://github.com/acuotasapp/prelanding#readme",
   "description": "",
   "dependencies": {
+    "@astrojs/vue": "^5.0.13",
     "@tailwindcss/cli": "^4.1.6",
+    "@tailwindcss/vite": "^4.1.6",
+    "astro": "^5.7.13",
     "tailwindcss": "^4.1.6"
   }
 }

@@ -1,0 +1,59 @@
+---
+import Icon from '../../assets/icons/whatsapp.svg'
+---
+
+<a
+	id="whatsapp-banner"
+	class="fixed bottom-4 right-4 bg-green-600 text-white rounded-full p-4 shadow-md hover:bg-green-700
+						 transition duration-300 flex items-center gap-4 mx-4 text-lg font-semibold"
+	title="Escríbenos por whatsapp"
+>
+	<span class="hidden">¿Quieres hablar con nosotros?</span>
+	<Icon class="size-8" />
+</a>
+
+<script>
+	class DeboucedHideText {
+		whatsappBtn: HTMLElement
+		textElement: HTMLElement
+		documentHeight: number
+		timeout: NodeJS.Timeout | null
+
+		constructor(whatsappBtn: HTMLElement) {
+			this.whatsappBtn = whatsappBtn
+			this.textElement = whatsappBtn.querySelector('span') as HTMLElement
+			this.documentHeight = document.documentElement.scrollHeight
+			this.timeout = null
+			this.deboucedHideText = this.deboucedHideText.bind(this)
+		}
+
+		init(): void {
+			window.addEventListener('scroll', this.deboucedHideText)
+		}
+
+		hideText(): void {
+			const scrollTop: number = window.scrollY // Distancia desde el top
+			const windowHeight: number =
+				window.visualViewport?.height || window.innerHeight // Alto del viewport
+
+			if (Math.floor(scrollTop + windowHeight) >= this.documentHeight - 8) {
+				this.textElement.classList.remove('hidden')
+			} else {
+				this.textElement.classList.add('hidden')
+			}
+		}
+
+		deboucedHideText(_event: Event): void {
+			if (this.timeout) {
+				clearTimeout(this.timeout)
+			}
+			this.timeout = setTimeout(this.hideText.bind(this), 50)
+		}
+	}
+
+	const deboucedHideText: DeboucedHideText = new DeboucedHideText(
+		document.getElementById('whatsapp-banner') as HTMLElement
+	)
+
+	deboucedHideText.init()
+</script>

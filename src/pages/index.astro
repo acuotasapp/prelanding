@@ -1,0 +1,23 @@
+---
+// Welcome to Astro! Everything between these triple-dash code fences
+// is your "component frontmatter". It never runs in the browser.
+import Layout from '../layouts/Layout.astro'
+import SocialMediaIconsList from '../components/molecules/SocialMediaIconsList.astro'
+import Hero from '../components/molecules/Hero.astro'
+import Event from '../components/molecules/Event.astro'
+import Events from '../components/organism/Events.astro'
+---
+
+<Layout>
+	<Hero />
+	<SocialMediaIconsList />
+	<section
+		id="subtitle"
+		class="flex flex-wrap gap-4 p-3 place-content-center text-white text-3xl font-extrabold leading-9"
+	>
+		<slot />
+	</section>
+	<Events>
+		<Event />
+	</Events>
+</Layout>

@@ -1,0 +1,32 @@
+---
+import EventPicture from '../../assets/panama-city-200.png'
+import { Image } from 'astro:assets'
+import EventTitle from '../molecules/EventTitle.astro'
+import EventDetails from '../molecules/EventDetails.astro'
+import EventTotal from '../molecules/EventTotal.astro'
+import EventActions from '../molecules/EventActions.astro'
+---
+
+<section
+	id="product-card"
+	class="flex flex-col gap-4 px-4 py-8 justify-center items-stretch bg-white rounded-3xl shadow-sm border border-gray-200 max-w-lg"
+>
+	<Image
+		src={EventPicture}
+		alt="Panama City 200"
+		class="h-56 rounded-t-3xl border border-gray-200"
+	/>
+
+	<section id="content" class="contents">
+		<EventTitle
+			title="Curva 6 - Grada - Panama City 200"
+			description="Por primera vez en Panamá, NASCAR México prende los motores con lo mejor del continente. Dos días de pura emoción, velocidad y carreras que no se repiten."
+		/>
+		<!-- Event details-->
+		<EventDetails />
+	</section>
+	<!-- Event Prices -->
+	<EventTotal price="110" commission="20.54" />
+	<!-- Event Actions -->
+	<EventActions />
+</section>

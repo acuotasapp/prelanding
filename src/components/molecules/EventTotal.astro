@@ -1,0 +1,11 @@
+---
+import EventPrice from '../atoms/EventPrice.astro'
+import EventComission from '../atoms/EventComission.astro'
+
+const { price, commission } = Astro.props
+---
+
+<section id="event-price" class="flex flex-col gap-2">
+	<EventPrice value={price} />
+	<EventComission value={commission} />
+</section>
