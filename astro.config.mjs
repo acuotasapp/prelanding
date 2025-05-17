@@ -7,6 +7,6 @@ export default defineConfig({
   vite: {
     plugins: [tailwindcss()]
   },
-  site: 'https://acuotasapp.github.io/',
-  base: 'prelanding',
+  site: 'https://acuotas.app/',
+  base: '/',
 });

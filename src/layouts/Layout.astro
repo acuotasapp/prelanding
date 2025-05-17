@@ -7,14 +7,16 @@ import Whatsapp from '../components/molecules/Whatsapp.astro'
     some magic sprinkled in to help you build great templates. -->
 <html>
 	<head>
+		<link rel="icon" type="image/svg+xml" href="/src/assets/favicon.svg" />
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
 		<title>AcuotasApp</title>
 	</head>
 	<body class="bg-primary-600 sm:bg-white">
 		<div
-			class="min-h-screen pt-24 pb-4 px-3 flex flex-col gap-4 from-white to-primary-600 from-25% to-50% mx-auto
-						 w-xl bg-gradient-to-b overflow-y-auto mb-16 sm:rounded-3xl sm:shadow-lg sm:border sm:border-gray-200 sm:mt-4"
+			class="min-h-dvh pt-24 pb-4 flex flex-col gap-4 from-white to-primary-600 from-25% to-50% sm:mx-auto
+						 w-full max-w-xl bg-gradient-to-b overflow-y-auto mb-16 sm:rounded-3xl sm:shadow-lg sm:border sm:border-gray-200 sm:mt-4"
 		>
 			<slot />
 		</div>
