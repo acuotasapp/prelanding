@@ -1,0 +1,26 @@
+---
+import Instagram from '../../assets/icons/instagram.svg'
+import Facebook from '../../assets/icons/facebook.svg'
+import Whatsapp from '../../assets/icons/whatsapp.svg'
+import XSocial from '../../assets/icons/x.svg'
+import Tiktok from '../../assets/icons/tiktok.svg'
+
+import SocialMediaIcon from '../atoms/SocialMediaIcon.astro'
+---
+
+<section
+	id="social-media"
+	class="flex justify-between items-center gap-4 p-4 w-md self-center"
+>
+	<SocialMediaIcon
+		url="https://www.instagram.com/acuotasapp/"
+		Icon={Instagram}
+	/>
+	<!-- <SocialMediaIcon url="https://www.facebook.com/acuotasapp/" Icon={Facebook} /> -->
+	<SocialMediaIcon
+		url="https://wa.me/50768800173?text=Hola,%20quiero%20más%20información%20sobre%20AcuotasApp"
+		Icon={Whatsapp}
+	/>
+	<!-- <SocialMediaIcon url="https://www.x.com/acuotasapp/" Icon={XSocial} /> -->
+	<SocialMediaIcon url="https://www.tiktok.com/@acuotasapp" Icon={Tiktok} />
+</section>
