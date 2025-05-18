@@ -5,7 +5,7 @@ import EventComission from '../atoms/EventComission.astro'
 const { price, commission } = Astro.props
 ---
 
-<section id="event-price" class="flex flex-col gap-2">
+<section id="event-price" class="flex items-center gap-1">
 	<EventPrice value={price} />
 	<EventComission value={commission} />
 </section>
