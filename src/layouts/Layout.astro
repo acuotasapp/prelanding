@@ -4,8 +4,8 @@ import Whatsapp from '../components/molecules/Whatsapp.astro'
 ---
 
 <!-- Below is your "component template." It's just HTML, but with
-    some magic sprinkled in to help you build great templates. -->
-<html>
+    some magic sprinkled in to help you build great templates. --><!doctype html>
+<html lang="en">
 	<head>
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta charset="UTF-8" />
@@ -13,10 +13,10 @@ import Whatsapp from '../components/molecules/Whatsapp.astro'
 
 		<title>AcuotasApp</title>
 	</head>
-	<body class="bg-primary-600 sm:bg-white">
+	<body class="bg-gray-50 min-h-svh">
 		<div
-			class="min-h-dvh pt-24 pb-4 flex flex-col gap-4 from-white to-primary-600 from-25% to-50% sm:mx-auto
-						 w-full max-w-xl bg-gradient-to-b overflow-y-auto mb-16 sm:rounded-3xl sm:shadow-lg sm:border sm:border-gray-200 sm:mt-4"
+			class="h-full pt-24 pb-20 flex flex-col gap-4 bg-primary-50 w-full max-w-xl overflow-y-auto
+			sm:mx-auto sm:rounded-3xl sm:shadow-lg sm:border sm:border-primary-200 sm:mt-4 sm:mb-24 sm:pb-4"
 		>
 			<slot />
 		</div>

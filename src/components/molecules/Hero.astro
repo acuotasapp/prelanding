@@ -1,5 +1,6 @@
 ---
 import Logo from '../../assets/logo.svg'
+import Experiences from './Experiences.astro'
 ---
 
 <section class="mx-auto flex flex-col items-center gap-8 pt-8 px-4">
@@ -7,7 +8,10 @@ import Logo from '../../assets/logo.svg'
 	<figcaption class="contents">
 		<h1 class="sr-only">A cuotas App</h1>
 	</figcaption>
-	<p class="text-center text-gray-600 text-lg font-bold">
-		Reserva lo que quieras con un abono incial y el resto #PagaloACuotas
-	</p>
+	<div class="text-center text-gray-600 text-lg font-bold w-xs">
+		Reserva <Experiences />
+		<br /> con un abono incial y el resto <span class="text-primary-600"
+			>#PágaloAcuotas</span
+		>
+	</div>
 </section>

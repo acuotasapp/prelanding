@@ -37,7 +37,7 @@ import Icon from '../../assets/icons/whatsapp.svg'
 			const windowHeight: number =
 				window.visualViewport?.height || window.innerHeight // Alto del viewport
 
-			if (Math.floor(scrollTop + windowHeight) >= this.documentHeight - 8) {
+			if (Math.floor(scrollTop + windowHeight) >= this.documentHeight - 16) {
 				this.textElement.classList.remove('hidden')
 			} else {
 				this.textElement.classList.add('hidden')

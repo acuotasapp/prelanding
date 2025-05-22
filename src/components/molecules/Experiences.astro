@@ -1,0 +1,119 @@
+---
+
+---
+
+<div class="inline relative w-fit text-lg overflow-hidden text-primary-600">
+	<span id="typewriter-text"></span>
+</div>
+
+<script>
+	class TypeWriterHero {
+		private textElement: HTMLElement
+		private phrases: string[]
+		private typingSpeed: number
+		private erasingSpeed: number
+		private delayBetweenPhrases: number
+		private currentPhrase: number
+		private currentLetter: number
+		private isDeleting: boolean
+		private currentText: string
+
+		constructor(
+			textElement: HTMLElement,
+			phrases: string[],
+			typingSpeed: number,
+			erasingSpeed: number,
+			delayBetweenPhrases: number
+		) {
+			this.textElement = textElement
+			this.phrases = phrases
+			this.typingSpeed = typingSpeed
+			this.erasingSpeed = erasingSpeed
+			this.delayBetweenPhrases = delayBetweenPhrases
+			this.currentPhrase = 0
+			this.currentLetter = 0
+			this.currentText = this.phrases[0]
+			this.isDeleting = false
+			this.type = this.type.bind(this)
+			this.erase = this.erase.bind(this)
+		}
+
+		public init(): void {
+			document.addEventListener('DOMContentLoaded', this.type)
+		}
+
+		public type() {
+			this.currentLetter++
+			this.displayText()
+
+			if (!this.isFullyTyped()) return setTimeout(this.type, this.typingSpeed)
+			if (!this.isLastPhrase()) return this.startErasing()
+
+			this.stop()
+		}
+
+		private stop(): void {
+			document.removeEventListener('DOMContentLoaded', this.type)
+		}
+
+		private erase() {
+			this.currentLetter--
+			this.displayText()
+
+			if (this.currentLetter === 0) return this.startTyping()
+
+			setTimeout(this.erase, this.erasingSpeed)
+		}
+
+		private startErasing(): void {
+			this.isDeleting = true
+			setTimeout(this.erase, this.delayBetweenPhrases)
+		}
+
+		private startTyping(): void {
+			this.isDeleting = false
+			this.currentPhrase++
+			this.setCurrentText()
+			setTimeout(this.type, this.typingSpeed)
+		}
+
+		private isLastPhrase(): boolean {
+			return this.currentPhrase === this.phrases.length - 1
+		}
+
+		private setCurrentText(): void {
+			this.currentText = this.phrases[this.currentPhrase]
+		}
+
+		private displayText(): void {
+			const text: string = this.currentText.substring(0, this.currentLetter)
+			this.textElement.textContent = text
+		}
+
+		private isFullyTyped(): boolean {
+			return this.currentLetter === this.currentText.length
+		}
+	}
+
+	const phrases = [
+		'lo que quieras',
+		'tu concierto favorito',
+		'la carrera del año',
+		'la cena familiar',
+		'el destino romántico',
+		'la entrada al partido',
+		'ese curso online',
+		'tu chequeo anual',
+		'lo que te dé la gana',
+	]
+
+	const typeWriter = new TypeWriterHero(
+		document.getElementById('typewriter-text') as HTMLElement,
+		phrases,
+		50,
+		50,
+		1750
+	)
+
+	typeWriter.init()
+</script>
