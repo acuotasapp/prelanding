@@ -1,0 +1,48 @@
+---
+import type { CollectionEntry } from 'astro:content'
+import { Image } from 'astro:assets'
+
+import EventTitle from './EventTitle.astro'
+import EventDetails from './EventDetails.astro'
+import EventTotal from './EventTotal.astro'
+import EventActions from './EventActions.astro'
+
+interface Props {
+	event: CollectionEntry<'events'>
+}
+
+// `post` will match your 'blog' collection schema type
+const {
+	event: {
+		data: {
+			image,
+			title,
+			description,
+			vendor,
+			dates,
+			location,
+			price,
+			commission,
+			installmentAmount,
+			link,
+		},
+	},
+} = Astro.props as Props
+---
+
+<section
+	id="product-card"
+	class="flex flex-col gap-4 px-4 py-4 justify-center items-stretch bg-white rounded-3xl shadow-sm border border-gray-200 max-w-lg"
+>
+	<Image src={image.blob} alt={image.alt} class="rounded-2xl shadow-sm" />
+
+	<section id="content" class="contents">
+		<EventTitle title={title} description={description} />
+		<!-- Event details-->
+		<EventDetails vendor={vendor} dates={dates} location={location} />
+	</section>
+	<!-- Event Prices -->
+	<EventTotal price={price} commission={commission} />
+	<!-- Event Actions -->
+	<EventActions installmentAmount={installmentAmount} link={link} />
+</section>

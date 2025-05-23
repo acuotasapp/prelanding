@@ -2,16 +2,13 @@
 // Welcome to Astro! Everything between these triple-dash code fences
 // is your "component frontmatter". It never runs in the browser.
 import Layout from '../layouts/Layout.astro'
-import SocialMediaIconsList from '../components/molecules/SocialMediaIconsList.astro'
-import Hero from '../components/molecules/Hero.astro'
-import Event from '../components/molecules/Event.astro'
-import Events from '../components/organism/Events.astro'
+import Hero from '../components/Hero.astro'
+import Events from '../components/Events.astro'
+import Whatsapp from '../components/Whatsapp.astro'
 ---
 
 <Layout>
 	<Hero />
-	<SocialMediaIconsList />
-	<Events>
-		<Event />
-	</Events>
+	<Events />
+	<Whatsapp />
 </Layout>

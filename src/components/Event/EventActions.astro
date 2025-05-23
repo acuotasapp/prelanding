@@ -1,13 +1,14 @@
 ---
 import Isotype from '../../assets/iso-blanco.svg'
+const { installmentAmount, link } = Astro.props
 ---
 
 <section id="event-actions" class="gap-4 items-start">
 	<a
-		href="https://checkout.paguelofacil.com/acuotasapp/e77d6579"
+		href={link}
 		class="text-white text-xl bg-primary-600 flex items-center gap-2.5 px-4 py-4 rounded-2xl justify-center font-bold"
 	>
 		<Isotype class="h-5" />
-		Resérvalo por $32.50
+		Resérvalo por ${installmentAmount}
 	</a>
 </section>
