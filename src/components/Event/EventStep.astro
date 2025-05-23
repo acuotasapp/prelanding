@@ -1,0 +1,24 @@
+---
+import Isotype from '../../assets/iso-blanco.svg'
+
+const { step } = Astro.props as { step: string }
+
+const stepClasses: Function = (): string => {
+	switch (parseInt(step)) {
+		case 1:
+			return '[&>*>*:first-child]:fill-primary-600 [&>*>*:last-child]:fill-primary-600/20'
+		case 2:
+			return '[&>*>*:first-child]:fill-primary-600/20 [&>*>*:last-child]:fill-primary-600'
+		default:
+			return 'text-primary-600'
+	}
+}
+
+const isotypeClasses: string = `w-8 ${stepClasses()}`
+---
+
+<span
+	class="absolute flex items-center justify-center px-2 py-1.5 bg-gray-100 rounded-lg -start-6 ring-4 ring-white border border-primary-200"
+>
+	<Isotype class={isotypeClasses} />
+</span>

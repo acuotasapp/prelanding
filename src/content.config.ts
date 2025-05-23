@@ -16,7 +16,7 @@ const events = defineCollection({
     }),
     title: z.string(),
     description: z.string(),
-    vendor: z.string(),
+    producer: z.string(),
     dates: z.string(),
     location: z.string(),
     price: z.number(),
@@ -25,6 +25,7 @@ const events = defineCollection({
     installmentAmount: z.number(),
     link: z.string(),
     available: z.boolean(),
+    termsAndConditions: z.string(),
   }),
 });
 

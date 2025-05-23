@@ -1,14 +1,28 @@
 ---
 import Isotype from '../../assets/iso-blanco.svg'
-const { installmentAmount, link } = Astro.props
+import Modal from './EventTermsAndConditions.astro'
+
+const {
+	id: eventId,
+	installmentAmount,
+	link,
+	installments,
+	termsAndConditions,
+} = Astro.props
+
+const id = `${eventId}-terms-and-conditions-modal`
 ---
 
 <section id="event-actions" class="gap-4 items-start">
-	<a
-		href={link}
-		class="text-white text-xl bg-primary-600 flex items-center gap-2.5 px-4 py-4 rounded-2xl justify-center font-bold"
+	<button
+		data-modal-target={id}
+		data-modal-toggle={id}
+		class="text-white text-xl bg-primary-600 flex items-center gap-2.5 px-4 py-4.5 rounded-2xl justify-center font-bold w-full"
+		type="button"
 	>
 		<Isotype class="h-5" />
 		Resérvalo por ${installmentAmount}
-	</a>
+	</button>
+
+	<Modal {id} {installmentAmount} {link} {installments} {termsAndConditions} />
 </section>

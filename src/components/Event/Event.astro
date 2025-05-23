@@ -15,16 +15,19 @@ interface Props {
 const {
 	event: {
 		data: {
+			id,
 			image,
 			title,
 			description,
-			vendor,
+			producer,
 			dates,
 			location,
 			price,
 			commission,
 			installmentAmount,
+			installments,
 			link,
+			termsAndConditions,
 		},
 	},
 } = Astro.props as Props
@@ -39,10 +42,16 @@ const {
 	<section id="content" class="contents">
 		<EventTitle title={title} description={description} />
 		<!-- Event details-->
-		<EventDetails vendor={vendor} dates={dates} location={location} />
+		<EventDetails producer={producer} dates={dates} location={location} />
 	</section>
 	<!-- Event Prices -->
-	<EventTotal price={price} commission={commission} />
+	<EventTotal price={price.toFixed(2)} commission={commission.toFixed(2)} />
 	<!-- Event Actions -->
-	<EventActions installmentAmount={installmentAmount} link={link} />
+	<EventActions
+		installmentAmount={installmentAmount.toFixed(2)}
+		{link}
+		{installments}
+		{id}
+		{termsAndConditions}
+	/>
 </section>
