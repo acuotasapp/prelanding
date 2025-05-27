@@ -20,7 +20,7 @@ export class LinkGenerator implements ILinkGenerator {
     let url: string;
     try {
       this.pagueloFacil.setAmount(this.event.getInstallmentAmount());
-      this.pagueloFacil.setTax(this.event.installmentTax());
+      this.pagueloFacil.setTax(0);
       this.pagueloFacil.setDescription(this.normalizer.normalize(`Primera cuota de la entrada para ${this.event.getTitle()}. #PagaloACuotas`));
       url = await this.pagueloFacil.createPaymentLink();
     } catch (error) {
