@@ -1,22 +1,17 @@
 ---
-import type { CollectionEntry } from 'astro:content'
-import { getCollection } from 'astro:content'
-import EventCard from './Event/Event.astro'
+import type { CollectionEntry } from 'astro:content';
+import { getCollection } from 'astro:content';
+import EventCard from './Event/Event.astro';
 
-const filterAvaliableEvents = ({ data }) => {
-	return data.available
-}
+const filterAvaliableEvents = (event: CollectionEntry<'events'>) => {
+	return event.data.available;
+};
 
-const events: CollectionEntry<'events'>[] = await getCollection(
-	'events',
-	filterAvaliableEvents
-)
+const events: CollectionEntry<'events'>[] = await getCollection('events', filterAvaliableEvents);
 ---
 
 <section id="experiences" class="flex flex-wrap gap-8 p-4 place-content-center">
-	<div class="text-4xl font-bold text-center text-primary-600">
-		Nuestras experiencias
-	</div>
+	<div class="text-4xl font-bold text-center text-primary-600">Nuestras experiencias</div>
 
 	{events.map((event) => <EventCard event={event} />)}
 </section>

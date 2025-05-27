@@ -1,8 +1,4 @@
-export interface IDateCalculator {
-  getDates(): string[];
-}
-
-export class DateCalculator implements IDateCalculator {
+export class DateCalculator {
   private today: Date;
   private dates: string[];
   private currentMonth: number;
@@ -10,9 +6,9 @@ export class DateCalculator implements IDateCalculator {
   private VALID_DAYS: number[] = [15, 30];
   private installments: number;
 
-  constructor(installments: number) {
+  constructor(installments: number, startDate?: Date) {
     this.installments = installments;
-    this.today = new Date();
+    this.today = startDate || new Date();
     this.today.setHours(0, 0, 0, 0); // Normaliza a medianoche
     this.dates = [this.formatDate(this.today)];
     this.currentMonth = this.today.getMonth();

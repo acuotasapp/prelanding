@@ -1,11 +1,15 @@
 ---
-import EventPrice from './EventPrice.astro'
-import EventComission from './EventComission.astro'
-
-const { price, commission } = Astro.props
+const { price, commission } = Astro.props;
 ---
 
 <section id="event-price" class="flex items-center gap-1">
-	<EventPrice value={price} />
-	<EventComission value={commission} />
+	<h4 class="leading-tight text-xl font-bold text-gray-900">
+		<span class="sr-only">Subtotal</span>
+		${price}
+	</h4>
+
+	<p class="leading-tight text-base font-semibold">
+		<span class="sr-only">Comisiones</span>
+		(+${commission} de servicio)
+	</p>
 </section>

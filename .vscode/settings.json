@@ -1,0 +1,30 @@
+{
+  "editor.formatOnSave": false,
+  "prettier.resolveGlobalModules": false,
+  "prettier.vueIndentScriptAndStyle": true,
+  "vetur.validation.template": false,
+
+  "[typescript]": {
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "vscode.typescript-language-features"
+  },
+  "[vue]": {
+    "editor.defaultFormatter": "Vue.volar"
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[astro]": {
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "astro-build.astro-vscode"
+  },
+  "[css]": {
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "tailwindCSS.experimental.classRegex": [
+    "class\\s*=\\s*['\"]([^'\"]*)['\"]",
+    "[:\\w-]*class(?:Name)?\\s*=\\s*['\"]([^'\"]*)['\"]"
+  ],
+  "oxc.enable": true
+}

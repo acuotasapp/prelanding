@@ -1,8 +1,23 @@
 {
-  // Included with "astro/tsconfigs/strict" or "astro/tsconfigs/strictest"
-  "extends": "astro/tsconfigs/base",
   "compilerOptions": {
-    "strictNullChecks": true, // add if using `base` template
-    "allowJs": true // required, and included with all Astro templates
-  }
+    "target": "ESNext",
+    "module": "ESNext",
+    "moduleResolution": "Node",
+    "jsx": "preserve",
+    "esModuleInterop": true,
+    "strict": true,
+    "allowJs": false,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "skipLibCheck": true,
+    "types": ["astro/client"],
+    "allowImportingTsExtensions": true,
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"]
+    }
+  },
+  "include": ["src", "src/env.d.ts"],
+  "exclude": ["node_modules", "dist"]
 }

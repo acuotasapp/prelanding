@@ -1,28 +1,111 @@
 ---
-import Isotype from '../../assets/iso-blanco.svg'
-import Modal from './EventTermsAndConditions.astro'
+import Isotype from '../../assets/iso-blanco.svg';
+import XIcon from '@/assets/icons/x.svg';
+import EventStep from './EventStep.astro';
+import { DateCalculator } from '@/utils/DateCalculator.ts';
 
-const {
-	id: eventId,
-	installmentAmount,
-	link,
-	installments,
-	termsAndConditions,
-} = Astro.props
+const { installmentAmount, id, installments } = Astro.props;
 
-const id = `${eventId}-terms-and-conditions-modal`
+const modalId = `${id}-terms-and-conditions-modal`;
+
+const calculator = new DateCalculator(installments);
+const dates = calculator.getDates();
 ---
 
 <section id="event-actions" class="gap-4 items-start">
 	<button
-		data-modal-target={id}
-		data-modal-toggle={id}
+		data-modal-target={modalId}
+		data-modal-toggle={modalId}
 		class="text-white text-xl bg-primary-600 flex items-center gap-2.5 px-4 py-4.5 rounded-2xl justify-center font-bold w-full"
 		type="button"
 	>
 		<Isotype class="h-5" />
-		Resérvalo por ${installmentAmount}
+		Resérvalo por {installmentAmount}
 	</button>
 
-	<Modal {id} {installmentAmount} {link} {installments} {termsAndConditions} />
+	<div
+		id={modalId}
+		tabindex="-1"
+		aria-hidden="true"
+		class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full"
+	>
+		<div class="relative p-4 w-full max-w-md max-h-full">
+			<div class="relative bg-white rounded-lg shadow-sm">
+				<div
+					class="flex items-center justify-between p-4 md:p-5 border-b rounded-t border-gray-200"
+				>
+					<h3 class="text-lg font-semibold text-gray-900">Reserva tu lugar</h3>
+					<button
+						type="button"
+						class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm h-8 w-8 ms-auto inline-flex justify-center items-center"
+						data-modal-toggle={modalId}
+					>
+						<XIcon class="size-3" />
+						<span class="sr-only">Cerrar modal</span>
+					</button>
+				</div>
+
+				<div class="p-4 md:p-5">
+					<ol class="relative border-s border-primary-200 ms-6 mb-4 md:mb-5">
+						<li class="mb-10 ms-8 flex flex-wrap items-baseline justify-between">
+							<EventStep step="1" />
+							<h3
+								class="flex justify-between items-start mb-1 text-lg font-semibold text-gray-900 grow"
+							>
+								Reserva tu lugar
+								<span
+									class="bg-primary-100 text-primary-800 text-sm font-medium px-2.5 py-0.5 rounded-sm ms-3"
+								>
+									¡Hoy!
+								</span>
+							</h3>
+							<p class="text-base text-gray-800">
+								Cuota inicial de {installmentAmount}
+							</p>
+							<time class="text-sm font-normal leading-none text-gray-500">{dates[0]}</time>
+						</li>
+
+						<li class="mb-10 ms-8">
+							<EventStep step="2" />
+							<h3 class="mb-1 text-lg font-semibold text-gray-900">Paga de tus cuotas</h3>
+							<ol>
+								{
+									dates.slice(1, -1).map((date, idx) => (
+										<li class="flex items-baseline justify-between">
+											<p class="text-base text-gray-800">
+												Cuota {idx + 2} de {installmentAmount}
+											</p>
+											<time class="text-sm font-normal leading-none text-gray-500">{date}</time>
+										</li>
+									))
+								}
+							</ol>
+						</li>
+
+						<li class="ms-8 grid grid-cols-[auto_auto] items-baseline justify-between">
+							<EventStep step="3" />
+							<h3 class="mb-1 text-lg font-semibold text-gray-900 w-full col-span-2">
+								Obten tu boleto
+							</h3>
+							<p class="text-base text-gray-800">
+								Última cuota de {installmentAmount}
+							</p>
+							<time class="text-sm font-normal leading-none text-gray-500">{dates.at(-1)}</time>
+							<p class="text-sm font-semibold text-primary-600 w-full">
+								En 24 horas recibirás tu boleto
+							</p>
+						</li>
+					</ol>
+					<slot />
+					<a
+						:href="termsAndConditions"
+						class="block text-sm text-primary-600 text-right w-full mt-1.5 hover:underline"
+						download
+					>
+						Términos y condiciones
+					</a>
+				</div>
+			</div>
+		</div>
+	</div>
 </section>
