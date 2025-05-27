@@ -1,0 +1,89 @@
+---
+import Logo from '@/assets/logo.svg';
+import Check from '@/assets/icons/check-circle.svg';
+import Close from '@/assets/icons/close-circle.svg';
+import Info from '@/assets/icons/info-circle.svg';
+
+import ThanksCard from '@/components/Thanks/ThanksCard.astro';
+---
+
+<div class="p-4 flex flex-col h-full gap-8">
+	<div class="flex justify-center">
+		<Logo class="w-72" />
+	</div>
+
+	<ThanksCard
+		id="thanks-success"
+		whatsappText="¿Dudas? Escríbenos"
+		whatsappMessage="Hola! Tengo una duda sobre mi reserva."
+	>
+		<div class="size-24 p-5 rounded-full bg-green-100 flex items-center justify-center" slot="icon">
+			<Check class="w-full text-green-600" />
+		</div>
+		<h1 slot="title" class="text-2xl font-bold text-green-600">Tu boleto ha sido reservado</h1>
+		<div class="text-gray-600 mt-2 text-justify text-lg" slot="message">
+			El pago de tu cuota inicial fue exitoso.<br />
+			En menos de 24 horas nos pondremos en contacto contigo.
+		</div>
+	</ThanksCard>
+
+	<ThanksCard
+		title="El pago no se ha completado"
+		id="thanks-error"
+		whatsappText="Servicio al cliente"
+		whatsappMessage="Hola! Tengo un problema con mi pago."
+	>
+		<div class="size-24 p-5 rounded-full bg-red-100 flex items-center justify-center" slot="icon">
+			<Close class="w-full text-red-600" />
+		</div>
+		<h1 slot="title" class="text-2xl font-bold text-red-600">El pago no se ha completado</h1>
+		<div class="text-gray-600 mt-2 text-justify text-lg" slot="message">
+			Si crees que esto es un error, reintentalo en otro momento o contáctanos a través de WhatsApp
+			para buscar una solución.
+		</div>
+	</ThanksCard>
+	<ThanksCard
+		title="La orden se ha creado correctamente"
+		id="thanks-cash"
+		whatsappText="Necesito ayuda"
+		whatsappMessage="Hola! Tengo un problema con mi pago."
+	>
+		<div class="size-24 p-5 rounded-full bg-cyan-100 flex items-center justify-center" slot="icon">
+			<Info class="w-full text-cyan-600" />
+		</div>
+		<h1 slot="title" class="text-2xl font-bold text-cyan-600">
+			La orden se ha creado correctamente
+		</h1>
+		<div class="text-gray-600 mt-2 text-justify text-lg" slot="message">
+			En tu correo electrónico encontraras las instrucciones de cómo realizar el pago. Nos
+			comunicaremos contigo en menos de 24 horas de realizado el pago. Si tienes dudas, contáctanos
+			a través de WhatsApp.
+		</div>
+	</ThanksCard>
+</div>
+
+<script>
+	document.addEventListener('DOMContentLoaded', () => {
+		const params = new URLSearchParams(window.location.search);
+		const status = params.get('Estado');
+		const $success = document.getElementById('thanks-success') as HTMLElement;
+		const $error = document.getElementById('thanks-error') as HTMLElement;
+		const $cash = document.getElementById('thanks-cash') as HTMLElement;
+
+		if (status === 'Pendiente') {
+			$success.remove();
+			$error.remove();
+			$cash.classList.remove('hidden');
+		} else if (status === 'Aprobada') {
+			$success.classList.remove('hidden');
+			$error.remove();
+			$cash.remove();
+		} else if (status === 'Denegada') {
+			$success.remove();
+			$error.classList.remove('hidden');
+			$cash.remove();
+		} else {
+			window.location.replace('/');
+		}
+	});
+</script>

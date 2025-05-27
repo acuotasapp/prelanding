@@ -2,12 +2,12 @@
 import type { CollectionEntry } from 'astro:content';
 import { Image } from 'astro:assets';
 
-import EventTitle from './EventTitle.astro';
-import EventDetails from './EventDetails.astro';
-import EventTotal from './EventTotal.astro';
-import EventActions from './EventActions.astro';
-import EventPayment from './EventPayment.vue';
-import Loader from '../Shared/Loader.astro';
+import EventTitle from '@/components/Event/EventTitle.astro';
+import EventDetails from '@/components/Event/EventDetails.astro';
+import EventTotal from '@/components/Event/EventTotal.astro';
+import EventActions from '@/components/Event/EventActions.astro';
+import EventPayment from '@/components/Event/EventPayment.vue';
+import Loader from '@/components/Shared/Loader.astro';
 
 interface Props {
 	event: CollectionEntry<'events'>;
@@ -17,8 +17,17 @@ const {
 	event: { data: event },
 } = Astro.props as Props;
 
-const { image, title, description, producer, dates, location, price, commission } =
-	event as CollectionEntry<'events'>;
+const {
+	image,
+	title,
+	description,
+	producer,
+	dates,
+	location,
+	price,
+	installmentAmount,
+	commission,
+} = event as CollectionEntry<'events'>;
 ---
 
 <section
@@ -33,7 +42,7 @@ const { image, title, description, producer, dates, location, price, commission 
 	</section>
 	<EventTotal price={price.toFixed(2)} commission={commission.toFixed(2)} />
 	<EventActions
-		installmentAmount={price.toFixed(2)}
+		installmentAmount={installmentAmount.toFixed(2)}
 		id={event.id}
 		installments={event.installments}
 	>

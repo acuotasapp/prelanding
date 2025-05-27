@@ -21,7 +21,7 @@ onMounted(async () => {
   const pagueloFacilOptions: IPagueloFacilOptions = {
     cclw: 'E7D8F1DF90910945B0AEA09FE6FD80E906939C2C3A5427DE6D7ACADD01D8444786F354BA8AE94672DA0D4918526D3014AC561044B9116784BE2235B092451F8A',
     eventId: event.getId() as string,
-    returnUrl: 'https://acuotas.app'
+    returnUrl: 'https://acuotas.app/thanks'
   };
 
   const pagueloFacil: IPagueloFacilLinkGenerator = new PagueloFacilLinkGenerator(pagueloFacilOptions, new HexEncoder());
