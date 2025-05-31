@@ -1,0 +1,35 @@
+---
+import Event from '@/components/Event/Event.astro';
+import Whatsapp from '@/components/Whatsapp.astro';
+import ResellerLayout from '@/layouts/ResellerLayout.astro';
+import Hero from '@/components/Hero.astro';
+import type { CollectionEntry } from 'astro:content';
+import { getCollection, getEntry, getEntries } from 'astro:content';
+import Events from '@/components/Events.astro';
+
+export function getStaticPaths() {
+	const filterAvaliableVendors = (reseller: CollectionEntry<'reseller'>) => {
+		return reseller.data.available;
+	};
+	return getCollection('reseller', filterAvaliableVendors).then(
+		(resellers: CollectionEntry<'reseller'>[]) => {
+			return resellers.map((reseller: CollectionEntry<'reseller'>) => {
+				return { params: { slug: reseller.data.id } };
+			});
+		},
+	);
+}
+
+const { slug: resellerId } = Astro.params;
+
+const reseller: CollectionEntry<'reseller'> = await getEntry('reseller', resellerId);
+const events: CollectionEntry<'event'>[] = await getEntries(reseller.data.events);
+---
+
+<ResellerLayout reseller={reseller}>
+	<Hero reseller={reseller} />
+	<Events events={events} reseller={reseller} />
+	<Whatsapp reseller={reseller} />
+</ResellerLayout>
+
+<div></div>

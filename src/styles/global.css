@@ -5,9 +5,6 @@
 @plugin "flowbite/plugin";
 @source "../../node_modules/flowbite";
 
-
-
-
 @theme {
   --font-sans: "Inter", sans-serif;
   --color-primary-50: oklch(97.91% 0.013 228.92);
@@ -21,4 +18,25 @@
   --color-primary-800: oklch(47.49% 0.093 229.93);
   --color-primary-900: oklch(41.56% 0.079 230.99);
   --color-primary-950: oklch(31.08% 0.06 233.98);
+}
+
+/* Resellers styles */
+@import "../content/reseller/alospits/alospits.css";
+
+@layer components {
+  .payment-btn {
+    @apply text-white inline-flex font-bold w-full justify-center items-center gap-2 bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 rounded-lg text-sm px-5 py-2.5 text-center;
+  }
+
+  .payment-btn i {
+    @apply block [&>*]:h-3.5 w-auto
+  }
+
+  .payment-link {
+    @apply underline w-full flex justify-end items-center text-primary-600 gap-2 leading-tight text-base font-bold hover:text-primary-700
+  }
+
+  .payment-link i {
+    @apply block [&>*]:h-5 w-auto
+  }
 }

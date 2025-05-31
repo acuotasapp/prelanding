@@ -1,0 +1,28 @@
+---
+import '@/styles/global.css';
+
+const {
+	reseller: { data: reseller },
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+		<title>{`${reseller.name} x Acuotas`}</title>
+	</head>
+	<body class="bg-gray-50 min-h-svh">
+		<div
+			class={`h-full pt-24 pb-20 flex flex-col gap-16 bg-primary-50 w-full max-w-xl overflow-y-auto
+			sm:mx-auto sm:rounded-3xl sm:shadow-lg sm:border sm:border-primary-200 sm:mt-4 sm:mb-24 sm:pb-4`}
+		>
+			<slot />
+		</div>
+		<script is:inline src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js">
+		</script>
+	</body>
+</html>

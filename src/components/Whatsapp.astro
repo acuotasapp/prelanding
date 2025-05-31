@@ -1,5 +1,13 @@
 ---
-import Icon from '../assets/icons/whatsapp.svg'
+import Icon from '../assets/icons/whatsapp.svg';
+
+const { reseller } = Astro.props;
+
+const url = new URL('https://wa.me/50768800173');
+const message = reseller
+	? 'Hola, quiero más información sobre AcuotasApp. Vengo de parte de ' + reseller.data.name
+	: 'Hola, quiero más información sobre AcuotasApp';
+url.searchParams.set('text', message);
 ---
 
 <a
@@ -7,7 +15,7 @@ import Icon from '../assets/icons/whatsapp.svg'
 	class="fixed bottom-4 right-4 bg-green-600 text-white rounded-full p-4 shadow-md hover:bg-green-700
 						 transition duration-300 flex items-center gap-4 text-base font-semibold"
 	title="Escríbenos por whatsapp"
-	href="https://wa.me/50768800173?text=Hola,%20quiero%20más%20información%20sobre%20AcuotasApp"
+	href={url.toString()}
 >
 	<span class="hidden pl-1">¿Quieres hablar con nosotros?</span>
 	<Icon class="size-8" />
@@ -15,46 +23,45 @@ import Icon from '../assets/icons/whatsapp.svg'
 
 <script>
 	class DeboucedHideText {
-		whatsappBtn: HTMLElement
-		textElement: HTMLElement
-		documentHeight: number
-		timeout: NodeJS.Timeout | null
+		whatsappBtn: HTMLElement;
+		textElement: HTMLElement;
+		documentHeight: number;
+		timeout: NodeJS.Timeout | null;
 
 		constructor(whatsappBtn: HTMLElement) {
-			this.whatsappBtn = whatsappBtn
-			this.textElement = whatsappBtn.querySelector('span') as HTMLElement
-			this.documentHeight = document.documentElement.scrollHeight
-			this.timeout = null
-			this.deboucedHideText = this.deboucedHideText.bind(this)
+			this.whatsappBtn = whatsappBtn;
+			this.textElement = whatsappBtn.querySelector('span') as HTMLElement;
+			this.documentHeight = document.documentElement.scrollHeight;
+			this.timeout = null;
+			this.deboucedHideText = this.deboucedHideText.bind(this);
 		}
 
 		init(): void {
-			window.addEventListener('scroll', this.deboucedHideText)
+			window.addEventListener('scroll', this.deboucedHideText);
 		}
 
 		hideText(): void {
-			const scrollTop: number = window.scrollY // Distancia desde el top
-			const windowHeight: number =
-				window.visualViewport?.height || window.innerHeight // Alto del viewport
+			const scrollTop: number = window.scrollY; // Distancia desde el top
+			const windowHeight: number = window.visualViewport?.height || window.innerHeight; // Alto del viewport
 
 			if (Math.floor(scrollTop + windowHeight) >= this.documentHeight - 16) {
-				this.textElement.classList.remove('hidden')
+				this.textElement.classList.remove('hidden');
 			} else {
-				this.textElement.classList.add('hidden')
+				this.textElement.classList.add('hidden');
 			}
 		}
 
 		deboucedHideText(_event: Event): void {
 			if (this.timeout) {
-				clearTimeout(this.timeout)
+				clearTimeout(this.timeout);
 			}
-			this.timeout = setTimeout(this.hideText.bind(this), 50)
+			this.timeout = setTimeout(this.hideText.bind(this), 50);
 		}
 	}
 
 	const deboucedHideText: DeboucedHideText = new DeboucedHideText(
-		document.getElementById('whatsapp-banner') as HTMLElement
-	)
+		document.getElementById('whatsapp-banner') as HTMLElement,
+	);
 
-	deboucedHideText.init()
+	deboucedHideText.init();
 </script>

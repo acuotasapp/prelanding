@@ -1,7 +1,13 @@
 ---
-import AboutUs from './Hero/AboutUs.astro'
-import SocialMediaIconsList from './Hero/SocialMediaIconsList.astro'
+import { CollectionEntry } from 'astro:content';
+import AboutUs from './Hero/AboutUs.astro';
+import SocialMediaIconsList from './Hero/SocialMediaIconsList.astro';
+
+const { reseller } = Astro.props as { reseller?: CollectionEntry<'reseller'> };
 ---
 
-<AboutUs />
-<SocialMediaIconsList />
+<AboutUs
+	headingColor={reseller ? `heading-${reseller.data.id}` : 'text-primary-600'}
+	reseller={reseller}
+/>
+{!reseller && <SocialMediaIconsList />}

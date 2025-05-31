@@ -1,17 +1,47 @@
 ---
-import Logo from '../../assets/logo.svg'
-import Experiences from './Experiences.astro'
+import { Image } from 'astro:assets';
+import Logo from '../../assets/logo.svg';
+import Isotype from '../../assets/iso-blanco.svg';
+import Experiences from './Experiences.astro';
+
+const { headingColor = 'text-primary-600', reseller } = Astro.props;
 ---
 
-<section class="mx-auto flex flex-col items-center gap-8 pt-8 px-4">
-	<Logo class="w-72" />
-	<figcaption class="contents">
-		<h1 class="sr-only">A cuotas App</h1>
-	</figcaption>
-	<div class="text-center text-gray-600 text-lg font-bold w-xs">
-		Reserva <Experiences />
-		<br /> con un abono incial y el resto <span class="text-primary-600"
-			>#PágaloAcuotas</span
-		>
-	</div>
-</section>
+{
+	reseller ? (
+		<section class="mx-auto flex flex-col items-center gap-16 pt-8 px-4">
+			<div class="flex items-center gap-2">
+				<Image
+					src={reseller.data.image.blob}
+					alt={reseller.data.image.alt}
+					class="size-28 rounded-lg"
+				/>
+
+				<figcaption class="flex flex-col justify-end items-start gap-0.5 text-primary-600">
+					<h1 class="sr-only">{reseller.data.name} en alianza con AcuotasApp</h1>
+					<span class="text-2xl font-semibold text-gray-500">en alianza con</span>
+					<span class="flex gap-0.5 items-center">
+						<Isotype class="h-10" />
+						<span class="text-2xl font-black ">AcuotasApp</span>
+					</span>
+				</figcaption>
+			</div>
+
+			<div class="text-center text-gray-600 text-lg font-bold w-xs">
+				Reserva <Experiences {headingColor} />
+				<br /> con un abono incial y el resto <span class={headingColor}>#PágaloAcuotas</span>
+			</div>
+		</section>
+	) : (
+		<section class="mx-auto flex flex-col items-center gap-8 pt-8 px-4">
+			<Logo class="w-72" />
+			<figcaption class="contents">
+				<h1 class="sr-only">A cuotas App</h1>
+			</figcaption>
+			<div class="text-center text-gray-600 text-lg font-bold w-xs">
+				Reserva <Experiences {headingColor} />
+				<br /> con un abono incial y el resto <span class={headingColor}>#PágaloAcuotas</span>
+			</div>
+		</section>
+	)
+}

@@ -3,24 +3,30 @@ import Isotype from '../../assets/iso-blanco.svg';
 import XIcon from '@/assets/icons/x.svg';
 import EventStep from './EventStep.astro';
 import { DateCalculator } from '@/utils/DateCalculator.ts';
+import { CollectionEntry } from 'astro:content';
 
-const { installmentAmount, id, installments } = Astro.props;
+const { installmentAmount, id, installments, termsAndConditions, reseller } = Astro.props as {
+	installmentAmount: number;
+	id: string;
+	installments: number;
+	termsAndConditions: string;
+	reseller?: CollectionEntry<'resellers'>;
+};
 
 const modalId = `${id}-terms-and-conditions-modal`;
 
 const calculator = new DateCalculator(installments);
 const dates = calculator.getDates();
+
+const colorReseller = `bg-gradient-to-r from-primary-600 to-${reseller?.data?.id}`;
+
+const color = `payment-btn text-xl gap-2.5 px-4 py-4.5 rounded-2xl font-bold w-full ${reseller ? colorReseller : ''}`;
 ---
 
 <section id="event-actions" class="gap-4 items-start">
-	<button
-		data-modal-target={modalId}
-		data-modal-toggle={modalId}
-		class="text-white text-xl bg-primary-600 flex items-center gap-2.5 px-4 py-4.5 rounded-2xl justify-center font-bold w-full"
-		type="button"
-	>
+	<button data-modal-target={modalId} data-modal-toggle={modalId} class={color} type="button">
 		<Isotype class="h-5" />
-		Resérvalo por {installmentAmount}
+		Resérvalo por ${installmentAmount}
 	</button>
 
 	<div
@@ -60,7 +66,7 @@ const dates = calculator.getDates();
 								</span>
 							</h3>
 							<p class="text-base text-gray-800">
-								Cuota inicial de {installmentAmount}
+								Cuota inicial de ${installmentAmount}
 							</p>
 							<time class="text-sm font-normal leading-none text-gray-500">{dates[0]}</time>
 						</li>
@@ -73,7 +79,7 @@ const dates = calculator.getDates();
 									dates.slice(1, -1).map((date, idx) => (
 										<li class="flex items-baseline justify-between">
 											<p class="text-base text-gray-800">
-												Cuota {idx + 2} de {installmentAmount}
+												Cuota {idx + 2} de ${installmentAmount}
 											</p>
 											<time class="text-sm font-normal leading-none text-gray-500">{date}</time>
 										</li>
@@ -88,7 +94,7 @@ const dates = calculator.getDates();
 								Obten tu boleto
 							</h3>
 							<p class="text-base text-gray-800">
-								Última cuota de {installmentAmount}
+								Última cuota de ${installmentAmount}
 							</p>
 							<time class="text-sm font-normal leading-none text-gray-500">{dates.at(-1)}</time>
 							<p class="text-sm font-semibold text-primary-600 w-full">
@@ -98,7 +104,7 @@ const dates = calculator.getDates();
 					</ol>
 					<slot />
 					<a
-						:href="termsAndConditions"
+						href={termsAndConditions}
 						class="block text-sm text-primary-600 text-right w-full mt-1.5 hover:underline"
 						download
 					>

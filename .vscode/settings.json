@@ -20,7 +20,7 @@
   },
   "[css]": {
     "editor.formatOnSave": true,
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "vscode.css-language-features"
   },
   "tailwindCSS.experimental.classRegex": [
     "class\\s*=\\s*['\"]([^'\"]*)['\"]",

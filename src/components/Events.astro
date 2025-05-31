@@ -1,17 +1,17 @@
 ---
 import type { CollectionEntry } from 'astro:content';
-import { getCollection } from 'astro:content';
 import EventCard from './Event/Event.astro';
 
-const filterAvaliableEvents = (event: CollectionEntry<'events'>) => {
-	return event.data.available;
-};
+export interface Props {
+	events: CollectionEntry<'event'>[];
+	reseller?: CollectionEntry<'reseller'>;
+}
 
-const events: CollectionEntry<'events'>[] = await getCollection('events', filterAvaliableEvents);
+const { events, reseller } = Astro.props as Props;
 ---
 
 <section id="experiences" class="flex flex-wrap gap-8 p-4 place-content-center">
 	<div class="text-4xl font-bold text-center text-primary-600">Nuestras experiencias</div>
 
-	{events.map((event) => <EventCard event={event} />)}
+	{events.map((event) => <EventCard event={event} reseller={reseller} />)}
 </section>

@@ -1,6 +1,4 @@
-import { CollectionEntry } from "astro:content";
-
-export class Event {
+export default class Event {
   id: string;
   image: {
     blob: string;
@@ -127,6 +125,10 @@ export class Event {
     const tax = this.installmentAmount / 1.07 - this.installmentAmount;
 
     return Math.ceil(tax * 100) / 100;
+  }
+
+  public getTotalPrice(): number {
+    return this.price + this.commission;
   }
 
   public totalTax(): number {

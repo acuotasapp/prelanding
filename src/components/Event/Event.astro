@@ -6,18 +6,19 @@ import EventTitle from '@/components/Event/EventTitle.astro';
 import EventDetails from '@/components/Event/EventDetails.astro';
 import EventTotal from '@/components/Event/EventTotal.astro';
 import EventActions from '@/components/Event/EventActions.astro';
-import EventPayment from '@/components/Event/EventPayment.vue';
+import PaymentButton from '@/components/Payment/Button.vue';
 import Loader from '@/components/Shared/Loader.astro';
+import EventSecondaryPayment from './EventSecondaryPayment.vue';
 
 interface Props {
 	event: CollectionEntry<'events'>;
+	reseller?: CollectionEntry<'resellers'>;
 }
 
-const {
-	event: { data: event },
-} = Astro.props as Props;
+const props = Astro.props as Props;
 
 const {
+	id,
 	image,
 	title,
 	description,
@@ -25,9 +26,11 @@ const {
 	dates,
 	location,
 	price,
+	installments,
 	installmentAmount,
 	commission,
-} = event as CollectionEntry<'events'>;
+	termsAndConditions,
+} = props.event.data as CollectionEntry<'events'>;
 ---
 
 <section
@@ -43,20 +46,12 @@ const {
 	<EventTotal price={price.toFixed(2)} commission={commission.toFixed(2)} />
 	<EventActions
 		installmentAmount={installmentAmount.toFixed(2)}
-		id={event.id}
-		installments={event.installments}
+		id={id}
+		installments={installments}
+		termsAndConditions={termsAndConditions}
+		reseller={props.reseller}
 	>
-		<EventPayment client:load {event}>
-			<button
-				class="text-white flex gap-1 font-bold w-full justify-center bg-primary-700 rounded-lg text-sm px-5 py-2.5 items-center cursor-not-allowed"
-				slot="loader"
-				disabled
-				aria-busy="true"
-				aria-label="Cargando reserva"
-			>
-				<Loader classNames="size-5 animate-spin" />
-				Cargando...
-			</button>
-		</EventPayment>
+		<PaymentButton client:load event={props.event} reseller={props.reseller} style="primary" />
 	</EventActions>
+	<PaymentButton client:load event={props.event} reseller={props.reseller} style="secondary" />
 </section>
