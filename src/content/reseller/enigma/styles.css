@@ -1,0 +1,9 @@
+@theme {
+  --color-enigma: #000;
+  --color-enigma-neutral: #BC955A;
+  --color-enigma-background: #000000;
+  --color-enigma-secondary: #000000
+}
+
+
+@source inline("{text,bg}-enigma{,-neutral,-background,-secondary}");

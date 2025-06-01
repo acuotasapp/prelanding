@@ -30,7 +30,8 @@ export class Payment {
 
     this.button = new BtnDecorator(
       this.url,
-      this.getButtonColor(),
+      this.event.getInstallmentAmount(),
+      this.reseller?.getId(),
       this.isFallback,
       this.type,
       this.style
@@ -42,21 +43,6 @@ export class Payment {
     return this.button as BtnDecorator;
   }
 
-  private getButtonColor(): string {
-    if (this.reseller) {
-      if (this.style === 'primary') {
-        return `payment-btn bg-gradient-to-r from-primary-600 to-${this.reseller.getId()}`
-      } else {
-        return `payment-link text-${this.reseller.getId()}`
-      }
-    } else {
-      if (this.style === 'primary') {
-        return 'payment-btn'
-      } else {
-        return 'payment-link'
-      }
-    }
-  }
 
   private price(): number {
     if (this.type === 'installment') return this.event.getInstallmentAmount() || 0;

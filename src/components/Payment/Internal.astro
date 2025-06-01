@@ -1,0 +1,12 @@
+---
+import { CollectionEntry } from 'astro:content';
+import ByInstallment from './ByInstallment.astro';
+import ByTotal from './ByTotal.astro';
+
+const { event } = Astro.props as {
+	event: CollectionEntry<'event'>;
+};
+---
+
+<ByInstallment event={event} style="primary" />
+<ByTotal event={event} style="secondary" />

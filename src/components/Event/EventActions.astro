@@ -1,5 +1,6 @@
 ---
-import Isotype from '../../assets/iso-blanco.svg';
+import Isotype from '@/assets/iso-blanco.svg';
+import Cart from '@/assets/icons/cart.svg';
 import XIcon from '@/assets/icons/x.svg';
 import EventStep from './EventStep.astro';
 import { DateCalculator } from '@/utils/DateCalculator.ts';
@@ -18,15 +19,15 @@ const modalId = `${id}-terms-and-conditions-modal`;
 const calculator = new DateCalculator(installments);
 const dates = calculator.getDates();
 
-const colorReseller = `bg-gradient-to-r from-primary-600 to-${reseller?.data?.id}`;
+const colorReseller = `${reseller?.data?.id}`;
 
-const color = `payment-btn text-xl gap-2.5 px-4 py-4.5 rounded-2xl font-bold w-full ${reseller ? colorReseller : ''}`;
+const color = `payment-link text-${reseller ? colorReseller : 'primary-600'} text-${reseller ? `${colorReseller}-neutral` : 'white'} text-xl gap-2.5 px-4 py-4.5 rounded-2xl font-bold w-full hover:bg-primary-700 hover:text-white`;
 ---
 
 <section id="event-actions" class="gap-4 items-start">
 	<button data-modal-target={modalId} data-modal-toggle={modalId} class={color} type="button">
 		<Isotype class="h-5" />
-		Resérvalo por ${installmentAmount}
+		{reseller ? 'o r' : 'R'}esérvalo por ${installmentAmount}
 	</button>
 
 	<div

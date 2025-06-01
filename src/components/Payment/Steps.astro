@@ -1,0 +1,52 @@
+---
+import EventStep from '@/components/Payment/Step.astro';
+import { DateCalculator } from '@/utils/DateCalculator';
+
+const { installmentAmount, installments } = Astro.props as {
+	installmentAmount: number;
+	installments: number;
+};
+
+const calculator = new DateCalculator(installments);
+const dates = calculator.getDates();
+---
+
+<ol class="relative border-s border-primary-200 ms-6 mb-4 md:mb-5">
+	<EventStep step="1">
+		<h3 class="flex justify-between items-start mb-1 text-lg font-semibold text-gray-900 grow">
+			Reserva tu lugar
+			<span
+				class="bg-primary-100 text-primary-800 text-sm font-medium px-2.5 py-0.5 rounded-sm ms-3"
+			>
+				¡Hoy!
+			</span>
+		</h3>
+		<p class="text-base text-gray-800">
+			Cuota inicial de ${installmentAmount}
+		</p>
+		<time class="text-sm font-normal leading-none text-gray-500">{dates[0]}</time>
+	</EventStep>
+
+	<EventStep step="2">
+		<h3 class="mb-1 text-lg font-semibold text-gray-900">Paga tus cuotas</h3>
+		<ol>
+			{
+				dates.slice(1, -1).map((date, idx) => (
+					<li class="flex items-baseline justify-between">
+						<p class="text-base text-gray-800">
+							Cuota {idx + 2} de ${installmentAmount}
+						</p>
+						<time class="text-sm font-normal leading-none text-gray-500">{date}</time>
+					</li>
+				))
+			}
+		</ol>
+	</EventStep>
+
+	<EventStep step="3">
+		<h3 class="mb-1 text-lg font-semibold text-gray-900 w-full col-span-2">Obten tu boleto</h3>
+		<p class="text-base text-gray-800">Última cuota de ${installmentAmount}</p>
+		<time class="text-sm font-normal leading-none text-gray-500">{dates.at(-1)}</time>
+		<p class="text-sm font-semibold text-primary-600 w-full">En 24 horas recibirás tu boleto</p>
+	</EventStep>
+</ol>

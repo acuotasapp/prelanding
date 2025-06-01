@@ -1,10 +1,15 @@
 ---
-const { headingColor = 'text-primary-600' } = Astro.props;
+const { resellerName } = Astro.props;
+
+const backgroundColor = resellerName ? `bg-${resellerName}-background` : 'bg-primary-600';
+const textColor = resellerName ? `text-${resellerName}-neutral` : 'text-white';
 ---
 
-<div class={`inline relative w-fit text-lg overflow-hidden ${headingColor}`}>
+<mark
+	class={`inline relative w-fit rounded-md p-1 text-lg overflow-hidden ${backgroundColor} ${textColor}`}
+>
 	<span id="typewriter-text"></span>
-</div>
+</mark>
 
 <script>
 	class TypeWriterHero {

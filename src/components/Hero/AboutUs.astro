@@ -22,14 +22,19 @@ const { headingColor = 'text-primary-600', reseller } = Astro.props;
 					<span class="text-2xl font-semibold text-gray-500">en alianza con</span>
 					<span class="flex gap-0.5 items-center">
 						<Isotype class="h-10" />
-						<span class="text-2xl font-black ">AcuotasApp</span>
+						<span class="text-2xl font-black">AcuotasApp</span>
 					</span>
 				</figcaption>
 			</div>
-
 			<div class="text-center text-gray-600 text-lg font-bold w-xs">
-				Reserva <Experiences {headingColor} />
-				<br /> con un abono incial y el resto <span class={headingColor}>#PágaloAcuotas</span>
+				Reserva
+				<Experiences resellerName={reseller.data.id} />
+				<br /> con un abono incial y el resto
+				<span
+					class={`rounded-md inline relative w-fit p-1 text-lg overflow-hidden bg-${reseller.data.id}-background text-${reseller.data.id}-neutral`}
+				>
+					#PágaloAcuotas
+				</span>
 			</div>
 		</section>
 	) : (
@@ -39,8 +44,11 @@ const { headingColor = 'text-primary-600', reseller } = Astro.props;
 				<h1 class="sr-only">A cuotas App</h1>
 			</figcaption>
 			<div class="text-center text-gray-600 text-lg font-bold w-xs">
-				Reserva <Experiences {headingColor} />
-				<br /> con un abono incial y el resto <span class={headingColor}>#PágaloAcuotas</span>
+				Reserva <Experiences />
+				<br /> con un abono incial y el resto
+				<span class="rounded-md inline relative w-fit p-1 text-lg overflow-hidden bg-primary-600 text-white">
+					#PágaloAcuotas
+				</span>
 			</div>
 		</section>
 	)

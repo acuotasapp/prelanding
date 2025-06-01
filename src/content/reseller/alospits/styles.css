@@ -1,0 +1,9 @@
+@theme {
+  --color-alospits: #FD0067;
+  --color-alospits-neutral: #ffffff;
+  --color-alospits-background: #99003C;
+  --color-alospits-secondary: #FD0067
+}
+
+
+@source inline("{text,bg}-alospits{,-neutral,-background,-secondary}");

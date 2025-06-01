@@ -1,0 +1,16 @@
+---
+import Button from '@/components/Payment/Button.vue';
+import { CollectionEntry } from 'astro:content';
+
+const {
+	event,
+	reseller,
+	style = 'secondary',
+} = Astro.props as {
+	event: CollectionEntry<'event'>;
+	reseller?: CollectionEntry<'reseller'>;
+	style: 'primary' | 'secondary';
+};
+---
+
+<Button client:load event={event} reseller={reseller} style={style} />

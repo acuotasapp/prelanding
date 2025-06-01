@@ -9,14 +9,15 @@ import { Payment } from '@/utils/payment/Payment';
 import { BtnDecorator } from '@/utils/payment/BtnDecorator';
 
 type Props = {
-  event: CollectionEntry<'events'>,
+  event: CollectionEntry<'event'>,
   style: string,
-  reseller?: CollectionEntry<'resellers'>
+  reseller?: CollectionEntry<'reseller'>,
+  type?: 'installment' | 'total',
 }
-const { event: eventRecord, style, reseller: resellerRecord } = defineProps<Props>()
+const { event: eventRecord, style, reseller: resellerRecord, type: forcedType } = defineProps<Props>()
 
-const event: Event = Event.fromCollectionEntry(eventRecord.data as CollectionEntry<'events'>);
-const reseller: Reseller | undefined = resellerRecord && Reseller.fromCollectionEntry(resellerRecord.data as CollectionEntry<'resellers'>);
+const event: Event = Event.fromCollectionEntry(eventRecord.data as CollectionEntry<'event'>);
+const reseller: Reseller | undefined = resellerRecord && Reseller.fromCollectionEntry(resellerRecord.data as CollectionEntry<'reseller'>);
 
 const paymentBtn: Ref<BtnDecorator | undefined> = ref(undefined);
 const iconHTML: Ref<string | undefined> = ref(undefined);
@@ -42,11 +43,10 @@ onMounted(async () => {
 <template>
   <Suspense>
     <template #default>
- 
       <a v-if="paymentBtn && iconHTML" :href="paymentBtn.getUrl()" :class="paymentBtn.getBtnStyle()"
         :title="paymentBtn.getTitleText()" :aria-label="paymentBtn.getTitleText()">
         <i v-html="iconHTML"></i>
-        {{ paymentBtn.getButtonText() }}
+        {{ paymentBtn.getButtonText(forcedType) }}
       </a>
       <Loader v-else :type="style" textBtn="Cargando..." textAria="Cargando botón de pago" />
     </template>

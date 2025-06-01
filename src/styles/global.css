@@ -21,11 +21,13 @@
 }
 
 /* Resellers styles */
-@import "../content/reseller/alospits/alospits.css";
+@import "../content/reseller/alospits/styles.css";
+@import "../content/reseller/promocionespanama/styles.css";
+@import "../content/reseller/enigma/styles.css";
 
 @layer components {
   .payment-btn {
-    @apply text-white inline-flex font-bold w-full justify-center items-center gap-2 bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 rounded-lg text-sm px-5 py-2.5 text-center;
+    @apply text-white inline-flex font-bold w-full justify-center items-center gap-2 focus:ring-4 focus:outline-none focus:ring-primary-300 rounded-lg text-xl text-center px-4.5 py-4 transition ease-in duration-150;
   }
 
   .payment-btn i {
@@ -33,7 +35,8 @@
   }
 
   .payment-link {
-    @apply underline w-full flex justify-end items-center text-primary-600 gap-2 leading-tight text-base font-bold hover:text-primary-700
+    @apply underline w-full flex justify-end items-center gap-2 leading-tight text-base font-bold hover:text-primary-700 transition ease-in duration-150;
+
   }
 
   .payment-link i {

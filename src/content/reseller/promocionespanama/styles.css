@@ -1,0 +1,9 @@
+@theme {
+  --color-promocionespanama: #FFD203;
+  --color-promocionespanama-neutral: #030303;
+  --color-promocionespanama-background: #FFD203;
+  --color-promocionespanama-secondary: #030303;
+}
+
+
+@source inline("{text,bg}-promocionespanama{,-neutral,-background,-secondary}");
