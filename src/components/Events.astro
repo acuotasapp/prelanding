@@ -11,7 +11,7 @@ const { events, reseller } = Astro.props as Props;
 ---
 
 <section id="experiences" class="flex flex-wrap gap-8 p-4 place-content-center">
-	<div class="text-4xl font-bold text-center text-primary-600">Nuestras experiencias</div>
+	<h2 class="text-4xl font-bold text-center text-primary-600">Nuestras experiencias</h2>
 
 	{events.map((event) => <EventCard event={event} reseller={reseller} />)}
 </section>

@@ -20,6 +20,7 @@
   "homepage": "https://github.com/acuotasapp/prelanding#readme",
   "description": "",
   "dependencies": {
+    "@astrojs/sitemap": "^3.4.0",
     "@astrojs/vue": "^5.1.0",
     "@tailwindcss/cli": "^4.1.6",
     "@tailwindcss/vite": "^4.1.6",
