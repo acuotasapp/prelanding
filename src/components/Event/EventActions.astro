@@ -24,7 +24,7 @@ const colorReseller = `${reseller?.data?.id}`;
 const color = `payment-link text-${reseller ? colorReseller : 'primary-600'} text-${reseller ? `${colorReseller}-neutral` : 'white'} text-xl gap-2.5 px-4 py-4.5 rounded-2xl font-bold w-full hover:bg-primary-700 hover:text-white`;
 ---
 
-<section id="event-actions" class="gap-4 items-start">
+<div id="event-actions" class="gap-4 items-start">
 	<button data-modal-target={modalId} data-modal-toggle={modalId} class={color} type="button">
 		<Isotype class="h-5" />
 		{reseller ? 'o r' : 'R'}esérvalo por ${installmentAmount}
@@ -115,4 +115,4 @@ const color = `payment-link text-${reseller ? colorReseller : 'primary-600'} tex
 			</div>
 		</div>
 	</div>
-</section>
+</div>

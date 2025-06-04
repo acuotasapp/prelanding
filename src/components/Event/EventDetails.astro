@@ -1,22 +1,20 @@
 ---
-import Store from '../../assets/icons/store.svg'
-import Calendar from '../../assets/icons/calendar.svg'
-import Location from '../../assets/icons/location.svg'
-import EventDetail from './EventDetail.astro'
+import Store from '../../assets/icons/store.svg';
+import Calendar from '../../assets/icons/calendar.svg';
+import Location from '../../assets/icons/location.svg';
+import EventDetail from './EventDetail.astro';
 
 const { producer, dates, location } = Astro.props as {
-	producer: string
-	dates: string
-	location: string
-}
+	producer: string;
+	dates: string;
+	location: string;
+};
 ---
 
-<section class="contents" id="event-details">
-	<dl
-		class="grid grid-cols-[auto_1fr] gap-x-2 gap-y-1 justify-start items-center text-gray-600"
-	>
+<div class="contents" id="event-details">
+	<dl class="grid grid-cols-[auto_1fr] gap-x-2 gap-y-1 justify-start items-center text-gray-600">
 		<EventDetail Icon={Store} label="Organizador" value={producer} />
 		<EventDetail Icon={Calendar} label="Fechas" value={dates} />
 		<EventDetail Icon={Location} label="Ubicación" value={location} />
 	</dl>
-</section>
+</div>
