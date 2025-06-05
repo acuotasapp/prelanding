@@ -1,0 +1,9 @@
+@theme {
+  --color-pub23: #FBD106;
+  --color-pub23-neutral: #010103;
+  --color-pub23-background: #FBD106;
+  --color-pub23-secondary: #010103
+}
+
+
+@source inline("{text,bg}-pub23{,-neutral,-background,-secondary}");

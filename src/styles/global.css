@@ -24,6 +24,10 @@
 @import "../content/reseller/alospits/styles.css";
 @import "../content/reseller/promocionespanama/styles.css";
 @import "../content/reseller/enigma/styles.css";
+/*@import "../content/reseller/daninori/styles.css";*/
+@import "../content/reseller/autofix/styles.css";
+@import "../content/reseller/pub23/styles.css";
+@import "../content/reseller/juanbar/styles.css";
 
 @layer components {
   .payment-btn {

@@ -1,0 +1,9 @@
+@theme {
+  --color-juanbar: #000000;
+  --color-juanbar-neutral: #fff;
+  --color-juanbar-background: #000000;
+  --color-juanbar-secondary: #000000
+}
+
+
+@source inline("{text,bg}-juanbar{,-neutral,-background,-secondary}");

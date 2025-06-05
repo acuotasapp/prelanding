@@ -1,0 +1,9 @@
+@theme {
+  --color-autofix: #31386F;
+  --color-autofix-neutral: #ffffff;
+  --color-autofix-background: #31386F;
+  --color-autofix-secondary: #31386F
+}
+
+
+@source inline("{text,bg}-autofix{,-neutral,-background,-secondary}");
