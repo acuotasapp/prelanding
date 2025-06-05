@@ -1,0 +1,9 @@
+@theme {
+  --color-autodromopanama: #E91D22;
+  --color-autodromopanama-neutral: #fff;
+  --color-autodromopanama-background: #000;
+  --color-autodromopanama-secondary: #E91D22
+}
+
+
+@source inline("{text,bg}-autodromopanama{,-neutral,-background,-secondary}");

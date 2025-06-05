@@ -28,6 +28,7 @@
 @import "../content/reseller/autofix/styles.css";
 @import "../content/reseller/pub23/styles.css";
 @import "../content/reseller/juanbar/styles.css";
+@import "../content/reseller/autodromopanama/styles.css";
 
 @layer components {
   .payment-btn {
