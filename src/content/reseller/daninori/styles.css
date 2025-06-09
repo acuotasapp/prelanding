@@ -1,0 +1,9 @@
+@theme {
+  --color-daninori: #0D6217;
+  --color-daninori-neutral: #fff;
+  --color-daninori-background: #0D6217;
+  --color-daninori-secondary: #0D6217;
+}
+
+
+@source inline("{text,bg}-daninori{,-neutral,-background,-secondary}");
