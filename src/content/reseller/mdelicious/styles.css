@@ -1,0 +1,9 @@
+@theme {
+  --color-mdelicious: #000;
+  --color-mdelicious-neutral: #fff;
+  --color-mdelicious-background: #000;
+  --color-mdelicious-secondary: #000
+}
+
+
+@source inline("{text,bg}-mdelicious{,-neutral,-background,-secondary}");
