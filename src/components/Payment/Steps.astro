@@ -22,7 +22,7 @@ const dates = calculator.getDates();
 			</span>
 		</h3>
 		<p class="text-base text-gray-800">
-			Cuota inicial de ${installmentAmount}
+			Cuota inicial de ${installmentAmount.toFixed(2)}
 		</p>
 		<time class="text-sm font-normal leading-none text-gray-500">{dates[0]}</time>
 	</EventStep>
@@ -34,7 +34,7 @@ const dates = calculator.getDates();
 				dates.slice(1, -1).map((date, idx) => (
 					<li class="flex items-baseline justify-between">
 						<p class="text-base text-gray-800">
-							Cuota {idx + 2} de ${installmentAmount}
+							Cuota {idx + 2} de ${installmentAmount.toFixed(2)}
 						</p>
 						<time class="text-sm font-normal leading-none text-gray-500">{date}</time>
 					</li>
@@ -45,7 +45,7 @@ const dates = calculator.getDates();
 
 	<EventStep step="3">
 		<h3 class="mb-1 text-lg font-semibold text-gray-900 w-full col-span-2">Obten tu boleto</h3>
-		<p class="text-base text-gray-800">Última cuota de ${installmentAmount}</p>
+		<p class="text-base text-gray-800">Última cuota de ${installmentAmount.toFixed(2)}</p>
 		<time class="text-sm font-normal leading-none text-gray-500">{dates.at(-1)}</time>
 		<p class="text-sm font-semibold text-primary-600 w-full">En 24 horas recibirás tu boleto</p>
 	</EventStep>
