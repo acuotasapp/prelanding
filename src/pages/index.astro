@@ -12,7 +12,13 @@ const filterAvaliableEvents = (event: CollectionEntry<'event'>) => {
 	return event.data.available;
 };
 
-const events: CollectionEntry<'event'>[] = await getCollection('event', filterAvaliableEvents);
+const sortEvents = (a: CollectionEntry<'event'>, b: CollectionEntry<'event'>): number => {
+	return b.data.order - a.data.order;
+};
+
+const events: CollectionEntry<'event'>[] = (
+	await getCollection('event', filterAvaliableEvents)
+).sort(sortEvents);
 ---
 
 <Layout>

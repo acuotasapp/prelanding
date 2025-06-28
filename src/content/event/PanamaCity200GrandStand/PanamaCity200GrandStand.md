@@ -15,4 +15,5 @@ installmentAmount: 24
 available: true
 termsAndConditions: '/files/panama-city-200-T&C.pdf'
 slug: '2'
+order: 1
 ---

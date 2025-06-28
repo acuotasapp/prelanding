@@ -1,50 +1,24 @@
-export default class Event {
-  id: string;
-  image: {
-    blob: string;
-    alt: string
-  };
-  title: string;
-  description: string;
-  producer: string;
-  dates: string;
-  price: number;
-  commission: number;
-  installments: number;
-  installmentAmount: number;
-  available: boolean;
-  termsAndConditions: string;
+type EventImage = {
+  blob: any;
+  alt: string
+}
 
+export default class Event {
   constructor(
-    id: string,
-    image: {
-      blob: string;
-      alt: string
-    },
-    title: string,
-    description: string,
-    producer: string,
-    dates: string,
-    price: number,
-    commission: number,
-    installments: number,
-    installmentAmount: number,
-    available: boolean,
-    termsAndConditions: string
-  ) {
-    this.id = id
-    this.image = image
-    this.title = title
-    this.description = description
-    this.producer = producer
-    this.dates = dates
-    this.price = price
-    this.commission = commission
-    this.installments = installments
-    this.installmentAmount = installmentAmount
-    this.available = available
-    this.termsAndConditions = termsAndConditions
-  }
+    private id: string,
+    private image: EventImage,
+    private title: string,
+    private description: string,
+    private producer: string,
+    private dates: string,
+    private price: number,
+    private commission: number,
+    private installments: number,
+    private installmentAmount: number,
+    private available: boolean,
+    private termsAndConditions: string,
+    private order: number
+  ) { }
 
   static fromCollectionEntry(record: {
     id: string;
@@ -62,6 +36,7 @@ export default class Event {
     installmentAmount: number;
     available: boolean;
     termsAndConditions: string;
+    order: number;
   }): Event {
 
     return new Event(
@@ -79,7 +54,8 @@ export default class Event {
       record.installments,
       record.installmentAmount,
       record.available,
-      record.termsAndConditions
+      record.termsAndConditions,
+      record.order
     )
   }
 
@@ -136,5 +112,9 @@ export default class Event {
     const tax = total / 1.07;
     return Math.ceil(tax * 100) / 100;
 
+  }
+
+  public getOrder(): number {
+    return this.order
   }
 }
