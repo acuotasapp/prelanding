@@ -17,5 +17,6 @@ export default ({ image }: any) => z.object({
   installmentAmount: z.number(),
   available: z.boolean(),
   termsAndConditions: z.string(),
-  order: z.number().default(0)
+  order: z.number().default(0),
+  isBuyable: z.boolean().default(true)
 })

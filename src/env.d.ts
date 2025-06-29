@@ -17,3 +17,9 @@ export type AstroReference = {
   id: string;
   collection: string;
 }
+
+export interface Buttoneable {
+  public async call(): Promise<void>;
+  public async createButton(): Promise<void>;
+  public getButton(): BtnDecorator;
+}

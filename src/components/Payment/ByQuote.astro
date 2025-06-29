@@ -1,0 +1,24 @@
+---
+import Event from '@/models/Event';
+import { PaymentFactory } from '@/utils/payment/PaymentFactory';
+import Whatsapp from '@/assets/icons/whatsapp.svg';
+
+type Props = { event: Event };
+
+const { event }: Props = Astro.props;
+
+const paymentFactory = new PaymentFactory(event);
+const quote = paymentFactory.createQuote();
+await quote.createButton();
+const button = quote.getButton();
+---
+
+<a
+  href={button.getUrl()}
+  class={button.getBtnStyle()}
+  title={button.getTitleText()}
+  aria-label={button.getTitleText()}
+>
+  <Whatsapp class="size-6" />
+  {button.getButtonText('quote')}
+</a>

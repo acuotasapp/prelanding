@@ -3,6 +3,7 @@ import ByInstallment from '@/components/Payment/ByInstallment.astro';
 import ByTotal from '@/components/Payment/ByTotal.astro';
 
 import Event from '@/models/Event';
+import ByQuote from './ByQuote.astro';
 
 type Props = {
   event: Event;
@@ -10,6 +11,13 @@ type Props = {
 
 const { event }: Props = Astro.props;
 ---
+{ event.getIsBuyable()
+  ? (
+    <ByInstallment event={event} style="primary" />
+    <ByTotal event={event} style="secondary" />
+  )
+  : (
+    <ByQuote {event} />
+  )
+}
 
-<ByInstallment event={event} style="primary" />
-<ByTotal event={event} style="secondary" />

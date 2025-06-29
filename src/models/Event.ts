@@ -18,7 +18,8 @@ export default class Event {
     private installmentAmount: number,
     private available: boolean,
     private termsAndConditions: string,
-    private order: number
+    private order: number,
+    private isBuyable: boolean
   ) { }
 
   static fromPrimitive(primitive: {
@@ -39,6 +40,7 @@ export default class Event {
     available: boolean;
     termsAndConditions: string;
     order: number;
+    isBuyable: boolean;
   }) {
     return new Event(
       primitive.id,
@@ -57,7 +59,8 @@ export default class Event {
       primitive.installmentAmount,
       primitive.available,
       primitive.termsAndConditions,
-      primitive.order
+      primitive.order,
+      primitive.isBuyable
     )
   }
 
@@ -79,6 +82,7 @@ export default class Event {
     available: boolean;
     termsAndConditions: string;
     order: number;
+    isBuyable: boolean;
   }): Event {
     return new Event(
       record.id,
@@ -97,7 +101,8 @@ export default class Event {
       record.installmentAmount,
       record.available,
       record.termsAndConditions,
-      record.order
+      record.order,
+      record.isBuyable
     )
   }
 
@@ -161,5 +166,9 @@ export default class Event {
 
   public getOrder(): number {
     return this.order
+  }
+
+  public getIsBuyable(): boolean {
+    return this.isBuyable
   }
 }

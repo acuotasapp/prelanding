@@ -1,10 +1,12 @@
+import { Buttoneable } from "@/env";
+
 import Event from "@/models/Event";
 import Reseller from "@/models/Reseller";
 
 import { BtnDecorator } from "@/utils/payment/BtnDecorator";
 import { LinkGenerator } from "@/utils/payment/LinkGenerator";
 
-export class Payment {
+export class Payment implements Buttoneable {
   private button?: BtnDecorator;
   private isCreated: boolean = false;
   private url: string = '';

@@ -2,16 +2,17 @@ import Event from "@/models/Event";
 import Reseller from "@/models/Reseller";
 
 import HexEncoder from "@/utils/HexEncoder";
-import UnicodeNormalizer from "@/utils/UnicodeNormalizer";
 import { LinkGenerator } from "@/utils/payment/LinkGenerator";
 import { IPagueloFacilOptions, PagueloFacilLinkGenerator } from "@/utils/payment/LinkGenerators/PagueloFacil";
 import { WhatsappLinkGenerator } from "@/utils/payment/LinkGenerators/Whatsapp";
 import { Payment } from "@/utils/payment/Payment";
+import { Quote } from "@/utils/payment/Quote";
+import UnicodeNormalizer from "@/utils/UnicodeNormalizer";
 
 export class PaymentFactory {
   constructor(
     private event: Event,
-    private style: string,
+    private style?: string,
     private reseller?: Reseller,
   ) { }
 
@@ -21,6 +22,12 @@ export class PaymentFactory {
     const whatsapp: WhatsappLinkGenerator = this.buildWhatsappLinkGenerator();
     const paymentLinkGenerator: LinkGenerator = this.buildPaymentLinkGenerator(pagueloFacil, whatsapp);
     return new Payment(this.event, paymentLinkGenerator, this.buildType(), this.style, this.reseller)
+  }
+
+  public createQuote(): Quote {
+    const message = `¡Hola! Estoy interesado en cotizar ${this.event.getTitle()} a cuotas.`
+    const whatsapp: WhatsappLinkGenerator = this.buildWhatsappLinkGenerator(message);
+    return new Quote(whatsapp, this.event)
   }
 
   private buildPagueloFacilOptions(): IPagueloFacilOptions {
@@ -37,8 +44,9 @@ export class PaymentFactory {
     return new PagueloFacilLinkGenerator(options, new HexEncoder());
   }
 
-  private buildWhatsappLinkGenerator(): WhatsappLinkGenerator {
-    return new WhatsappLinkGenerator(`Hola, quiero completar el proceso de pago del evento ${this.event.getTitle()}.`);
+  private buildWhatsappLinkGenerator(message?: string): WhatsappLinkGenerator {
+    const whatsappMessage = message || `Hola, quiero completar el proceso de pago del evento ${this.event.getTitle()}.`;
+    return new WhatsappLinkGenerator(whatsappMessage);
   }
 
   private buildPaymentLinkGenerator(pagueloFacil: PagueloFacilLinkGenerator, whatsapp: WhatsappLinkGenerator): LinkGenerator {

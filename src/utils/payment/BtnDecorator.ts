@@ -36,6 +36,7 @@ export class BtnDecorator {
 
   public getBtnStyle(): string {
     if (this.buttonStyle) return this.buttonStyle;
+    if (this.type === 'quote') return 'payment-btn bg-green-600 text-white hover:bg-green-700 hover:text-white'
 
     if (this.resellerName) {
       if (this.style === 'primary') {
@@ -53,10 +54,11 @@ export class BtnDecorator {
     return this.buttonStyle;
   }
 
-  public getButtonText(type?: 'installment' | 'total'): string {
+  public getButtonText(type?: 'installment' | 'total' | 'quote'): string {
     if (this.buttonText) { return this.buttonText; }
     if (type) { this.type = type; }
     this.call();
+    if (type === 'quote') return 'Cotízalo y #PágaloAcuotas';
     if (this.isFallback) return 'Completar por WhatsApp';
     if (this.style === 'primary' && this.type === 'installment') return `Resérvalo por $${this.price.toFixed(2)}`
     if (this.style === 'primary' && this.type === 'total') return 'Cómpralo completo'
@@ -65,6 +67,7 @@ export class BtnDecorator {
   }
 
   private buildTooltip(): string {
+    if (this.type === 'quote') return 'Cotízalo con nosotros y #PágaloAcuotas';
     if (this.isFallback) {
       if (this.type === 'installment') return 'Completa el proceso por WhatsApp';
 
