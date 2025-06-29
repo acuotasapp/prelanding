@@ -1,23 +1,26 @@
 <script setup lang="ts">
 import type { CollectionEntry } from 'astro:content';
 import { ref, Suspense, Ref, onMounted } from 'vue';
+
 import Loader from '@/components/Payment/Loader.vue';
+
 import Reseller from '@/models/Reseller';
 import Event from '@/models/Event';
+
 import { PaymentFactory } from '@/utils/payment/PaymentFactory';
 import { Payment } from '@/utils/payment/Payment';
 import { BtnDecorator } from '@/utils/payment/BtnDecorator';
 
 type Props = {
-  event: CollectionEntry<'event'>,
-  style: string,
-  reseller?: CollectionEntry<'reseller'>,
-  type?: 'installment' | 'total',
+  event: any;
+  style: string;
+  reseller?: any;
+  type?: 'installment' | 'total';
 }
-const { event: eventRecord, style, reseller: resellerRecord, type: forcedType } = defineProps<Props>()
 
-const event: Event = Event.fromCollectionEntry(eventRecord.data as CollectionEntry<'event'>);
-const reseller: Reseller | undefined = resellerRecord && Reseller.fromCollectionEntry(resellerRecord.data as CollectionEntry<'reseller'>);
+const { event: eventPrimitive, style, reseller: resellerPrimitive, type: forcedType } = defineProps<Props>();
+const event: Event = Event.fromPrimitive(eventPrimitive)
+const reseller: Reseller | undefined = resellerPrimitive && Reseller.fromPrimitive(resellerPrimitive)
 
 const paymentBtn: Ref<BtnDecorator | undefined> = ref(undefined);
 const iconHTML: Ref<string | undefined> = ref(undefined);

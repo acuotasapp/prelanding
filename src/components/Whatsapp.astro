@@ -5,7 +5,7 @@ const { reseller } = Astro.props;
 
 const url = new URL('https://wa.me/50768800173');
 const message = reseller
-	? 'Hola, quiero más información sobre AcuotasApp. Vengo de parte de ' + reseller.data.name
+	? 'Hola, quiero más información sobre AcuotasApp. Vengo de parte de ' + reseller.getName()
 	: 'Hola, quiero más información sobre AcuotasApp';
 url.searchParams.set('text', message);
 ---

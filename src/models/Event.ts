@@ -11,6 +11,7 @@ export default class Event {
     private description: string,
     private producer: string,
     private dates: string,
+    private location: string,
     private price: number,
     private commission: number,
     private installments: number,
@@ -19,6 +20,46 @@ export default class Event {
     private termsAndConditions: string,
     private order: number
   ) { }
+
+  static fromPrimitive(primitive: {
+    id: string;
+    image: {
+      blob: string;
+      alt: string
+    };
+    title: string;
+    description: string;
+    producer: string;
+    dates: string;
+    location: string;
+    price: number;
+    commission: number;
+    installments: number;
+    installmentAmount: number;
+    available: boolean;
+    termsAndConditions: string;
+    order: number;
+  }) {
+    return new Event(
+      primitive.id,
+      {
+        blob: primitive.image.blob,
+        alt: primitive.image.alt
+      },
+      primitive.title,
+      primitive.description,
+      primitive.producer,
+      primitive.dates,
+      primitive.location,
+      primitive.price,
+      primitive.commission,
+      primitive.installments,
+      primitive.installmentAmount,
+      primitive.available,
+      primitive.termsAndConditions,
+      primitive.order
+    )
+  }
 
   static fromCollectionEntry(record: {
     id: string;
@@ -30,6 +71,7 @@ export default class Event {
     description: string;
     producer: string;
     dates: string;
+    location: string;
     price: number;
     commission: number;
     installments: number;
@@ -38,7 +80,6 @@ export default class Event {
     termsAndConditions: string;
     order: number;
   }): Event {
-
     return new Event(
       record.id,
       {
@@ -49,6 +90,7 @@ export default class Event {
       record.description,
       record.producer,
       record.dates,
+      record.location,
       record.price,
       record.commission,
       record.installments,
@@ -77,6 +119,9 @@ export default class Event {
   }
   public getDates(): string {
     return this.dates;
+  }
+  public getLocation(): string {
+    return this.location
   }
   public getPrice(): number {
     return this.price;

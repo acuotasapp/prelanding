@@ -2,12 +2,17 @@
 import { CollectionEntry } from 'astro:content';
 import AboutUs from './Hero/AboutUs.astro';
 import SocialMediaIconsList from './Hero/SocialMediaIconsList.astro';
+import Reseller from '@/models/Reseller';
 
-const { reseller } = Astro.props as { reseller?: CollectionEntry<'reseller'> };
+type Props = {
+  reseller?: Reseller;
+};
+
+const { reseller }: Props = Astro.props;
 ---
 
 <AboutUs
-	headingColor={reseller ? `heading-${reseller.data.id}` : 'text-primary-600'}
-	reseller={reseller}
+  headingColor={reseller ? `heading-${reseller.getId()}` : 'text-primary-600'}
+  reseller={reseller}
 />
 {!reseller && <SocialMediaIconsList />}

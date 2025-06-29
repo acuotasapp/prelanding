@@ -12,3 +12,8 @@ declare module '*.astro' {
   const AstroComponent: any;
   export default AstroComponent;
 }
+
+export type AstroReference = {
+  id: string;
+  collection: string;
+}

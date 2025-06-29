@@ -1,9 +1,12 @@
 ---
 import '@/styles/global.css';
+import Reseller from '@/models/Reseller';
 
-const {
-	reseller: { data: reseller },
-} = Astro.props;
+type Props = {
+	reseller: Reseller;
+};
+
+const { reseller }: Props = Astro.props;
 
 // const logo = await import(`${reseller.image.blob}?url`);
 ---
@@ -17,7 +20,7 @@ const {
 		<!-- <meta name="og:image" content={logo.default} /> -->
 		<link rel="sitemap" href="/sitemap-index.xml" />
 
-		<title>{`${reseller.name} x Acuotas`}</title>
+		<title>{`${reseller.getName()} x Acuotas`}</title>
 	</head>
 	<body class="bg-gray-50 min-h-svh">
 		<div
@@ -26,7 +29,7 @@ const {
 		>
 			<slot />
 		</div>
-		<script is:inline src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js">
-		</script>
+		<script is:inline src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"
+		></script>
 	</body>
 </html>

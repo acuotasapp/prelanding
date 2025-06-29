@@ -2,15 +2,17 @@
 import { CollectionEntry } from 'astro:content';
 import ByInstallment from './ByInstallment.astro';
 import ByTotal from './ByTotal.astro';
+import ResellerModel from '@/models/Reseller';
+import EventModel from '@/models/Event';
 
 const { event, reseller } = Astro.props as {
-	event: CollectionEntry<'event'>;
-	reseller: CollectionEntry<'reseller'>;
+	event: EventModel;
+	reseller?: ResellerModel;
 };
 ---
 
 { 
-  reseller?.data?.primaryAction === 'installment' 
+  reseller?.getPrimaryAction() === 'installment'
     ? (
       <ByInstallment reseller={reseller} event={event} style="primary" />
       <ByTotal reseller={reseller} event={event} style="secondary" />

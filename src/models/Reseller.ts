@@ -1,4 +1,4 @@
-import Event from "@/models/Event";
+import type { AstroReference } from '@/env.d.ts'
 
 export default class Reseller {
   constructor(
@@ -10,9 +10,32 @@ export default class Reseller {
     private name: string,
     private color: string,
     private available: boolean,
-    private events: Event[],
+    private events: AstroReference[],
     private primaryAction: string
   ) { }
+
+  static fromPrimitive(primitive: {
+    id: string;
+    image: {
+      blob: string;
+      alt: string
+    };
+    name: string;
+    color: string;
+    available: boolean;
+    events: AstroReference[];
+    primaryAction: string;
+  }): Reseller {
+    return new Reseller(
+      primitive.id,
+      primitive.image,
+      primitive.name,
+      primitive.color,
+      primitive.available,
+      primitive.events,
+      primitive.primaryAction
+    )
+  }
 
   static fromCollectionEntry(record: {
     id: string;
@@ -23,16 +46,12 @@ export default class Reseller {
     name: string;
     color: string;
     available: boolean;
-    events: Event[];
+    events: AstroReference[];
     primaryAction: string;
   }): Reseller {
-
     return new Reseller(
       record.id,
-      {
-        blob: record.image.blob,
-        alt: record.image.alt
-      },
+      record.image,
       record.name,
       record.color,
       record.available,
@@ -53,7 +72,7 @@ export default class Reseller {
   public getColor(): string {
     return this.color;
   }
-  public getEvents(): Event[] {
+  public getEvents(): AstroReference[] {
     return this.events;
   }
   public isAvailable(): boolean {

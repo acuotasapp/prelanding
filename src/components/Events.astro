@@ -1,10 +1,12 @@
 ---
-import type { CollectionEntry } from 'astro:content';
-import EventCard from './Event/Event.astro';
+import EventCard from '@/components/Event/Event.astro';
+
+import Event from '@/models/Event';
+import Reseller from '@/models/Reseller';
 
 export interface Props {
-	events: CollectionEntry<'event'>[];
-	reseller?: CollectionEntry<'reseller'>;
+	events: Event[];
+	reseller?: Reseller;
 }
 
 const { events, reseller } = Astro.props as Props;

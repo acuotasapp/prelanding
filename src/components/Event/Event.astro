@@ -1,5 +1,4 @@
 ---
-import type { CollectionEntry } from 'astro:content';
 import { Picture } from 'astro:assets';
 
 import EventTitle from '@/components/Event/EventTitle.astro';
@@ -8,14 +7,17 @@ import EventTotal from '@/components/Event/EventTotal.astro';
 import Reseller from '@/components/Payment/Reseller.astro';
 import Internal from '@/components/Payment/Internal.astro';
 
+import EventModel from '@/models/Event';
+import ResellerModel from '@/models/Reseller';
+
 interface Props {
-	event: CollectionEntry<'events'>;
-	reseller?: CollectionEntry<'resellers'>;
+	event: EventModel;
+	reseller?: ResellerModel;
 }
 
 const { event, reseller } = Astro.props as Props;
 
-const { image, title, description, producer, dates, location, price, commission } = event.data;
+console.log(event);
 ---
 
 <section
@@ -23,14 +25,18 @@ const { image, title, description, producer, dates, location, price, commission 
 	class="flex flex-col gap-4 px-4 py-4 justify-center items-stretch bg-white rounded-3xl shadow-sm border border-gray-200 max-w-lg"
 >
 	<Picture
-		src={image.blob}
-		alt={image.alt}
+		src={event.getImage().blob}
+		alt={event.getImage().alt}
 		width="600"
 		height="600"
 		class="rounded-2xl shadow-sm"
 	/>
-	<EventTitle title={title} description={description} />
-	<EventDetails producer={producer} dates={dates} location={location} />
-	<EventTotal price={price.toFixed(2)} commission={commission.toFixed(2)} />
+	<EventTitle title={event.getTitle()} description={event.getDescription()} />
+	<EventDetails
+		producer={event.getProducer()}
+		dates={event.getDates()}
+		location={event.getLocation()}
+	/>
+	<EventTotal price={event.getPrice().toFixed(2)} commission={event.getCommission().toFixed(2)} />
 	{reseller ? <Reseller {reseller} {event} /> : <Internal {event} />}
 </section>

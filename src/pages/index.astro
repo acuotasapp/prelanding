@@ -7,22 +7,24 @@ import Layout from '../layouts/Layout.astro';
 import Hero from '../components/Hero.astro';
 import Events from '../components/Events.astro';
 import Whatsapp from '../components/Whatsapp.astro';
+import Event from '@/models/Event';
+import { EventRepository } from '@/repositories/static/EventRepository';
 
 const filterAvaliableEvents = (event: CollectionEntry<'event'>) => {
-	return event.data.available;
+  return event.data.available;
 };
 
 const sortEvents = (a: CollectionEntry<'event'>, b: CollectionEntry<'event'>): number => {
-	return b.data.order - a.data.order;
+  return b.data.order - a.data.order;
 };
 
-const events: CollectionEntry<'event'>[] = (
-	await getCollection('event', filterAvaliableEvents)
-).sort(sortEvents);
+const eventRepository = new EventRepository();
+
+const events: Event[] = await eventRepository.getCollection(filterAvaliableEvents, sortEvents);
 ---
 
 <Layout>
-	<Hero />
-	<Events events={events} />
-	<Whatsapp />
+  <Hero />
+  <Events events={events} />
+  <Whatsapp />
 </Layout>

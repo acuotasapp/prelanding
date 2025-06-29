@@ -1,8 +1,17 @@
 ---
 import { Image } from 'astro:assets';
-import Logo from '../../assets/logo.svg';
-import Isotype from '../../assets/iso-blanco.svg';
-import Experiences from './Experiences.astro';
+
+import Logo from '@/assets/logo.svg';
+import Isotype from '@/assets/iso-blanco.svg';
+
+import Experiences from '@/components/Hero/Experiences.astro';
+
+import Reseller from '@/models/Reseller';
+
+type Props = {
+	headingColor: string;
+	reseller?: Reseller;
+};
 
 const { headingColor = 'text-primary-600', reseller } = Astro.props;
 ---
@@ -12,13 +21,13 @@ const { headingColor = 'text-primary-600', reseller } = Astro.props;
 		<section class="mx-auto flex flex-col items-center gap-16 pt-8 px-4">
 			<div class="flex items-center gap-2">
 				<Image
-					src={reseller.data.image.blob}
-					alt={reseller.data.image.alt}
+					src={reseller.getImage().blob}
+					alt={reseller.getImage().alt}
 					class="size-28 rounded-lg"
 				/>
 
 				<figcaption class="flex flex-col justify-end items-start gap-0.5 text-primary-600">
-					<h1 class="sr-only">{reseller.data.name} en alianza con AcuotasApp</h1>
+					<h1 class="sr-only">{reseller.getName()} en alianza con AcuotasApp</h1>
 					<span class="text-2xl font-semibold text-gray-500">en alianza con</span>
 					<span class="flex gap-0.5 items-center">
 						<Isotype class="h-10" />
@@ -28,10 +37,10 @@ const { headingColor = 'text-primary-600', reseller } = Astro.props;
 			</div>
 			<div class="text-center text-gray-600 text-lg font-bold w-xs">
 				Reserva
-				<Experiences resellerName={reseller.data.id} />
+				<Experiences resellerName={reseller.getId()} />
 				<br /> con un abono inicial y el resto
 				<span
-					class={`rounded-md inline relative w-fit p-1 text-lg overflow-hidden bg-${reseller.data.id}-background text-${reseller.data.id}-neutral`}
+					class={`rounded-md inline relative w-fit p-1 text-lg overflow-hidden bg-${reseller.getId()}-background text-${reseller.getId()}-neutral`}
 				>
 					#PágaloAcuotas
 				</span>

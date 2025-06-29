@@ -1,34 +1,30 @@
 ---
-import Isotype from '@/assets/iso-blanco.svg';
-import { CollectionEntry } from 'astro:content';
-import Modal from './Modal.astro';
-import Button from './Button.vue';
+import Modal from '@/components/Payment/Modal.astro';
+import Button from '@/components/Payment/Button.vue';
+
+import Event from '@/models/Event';
+import Reseller from '@/models/Reseller';
+
 import { BtnDecorator } from '@/utils/payment/BtnDecorator';
-import { AstroComponentInstance } from 'astro/dist/runtime/server';
 
-const { event, reseller, style } = Astro.props as {
-	event: CollectionEntry<'event'>;
-	reseller?: CollectionEntry<'reseller'>;
-	style: 'primary' | 'secondary';
+type Props = {
+  event: Event;
+  reseller?: Reseller;
+  style: 'primary' | 'secondary';
 };
 
-const { id, installmentAmount, installments, termsAndConditions } = event.data as {
-	id: string;
-	installmentAmount: number;
-	installments: number;
-	termsAndConditions: string;
-};
+const { event, reseller, style }: Props = Astro.props;
 
-const modalId = `${id}-terms-and-conditions-modal`;
-
+const modalId = `${event.getId()}-terms-and-conditions-modal`;
 const buttonDecorator = new BtnDecorator(
-	'#',
-	event.data.installmentAmount,
-	reseller?.data?.id,
-	false,
-	'installment',
-	style,
+  '#',
+  event.getInstallmentAmount(),
+  reseller?.getId(),
+  false,
+  'installment',
+  style,
 );
+
 const Icons = import.meta.glob('@/assets/**/*.svg');
 const IconSrc = Object.keys(Icons).find((src) => src.includes(buttonDecorator.getIcon())) as string;
 const IconRef = (await Icons[IconSrc]()) as { default: any };
@@ -36,17 +32,22 @@ const Icon = IconRef.default;
 ---
 
 <section id="event-actions" class="gap-4 items-start">
-	<button
-		data-modal-target={modalId}
-		data-modal-toggle={modalId}
-		class={buttonDecorator.getBtnStyle()}
-		type="button"
-	>
-		<Icon class="h-5" />
-		{buttonDecorator.getButtonText()}
-	</button>
+  <button
+    data-modal-target={modalId}
+    data-modal-toggle={modalId}
+    class={buttonDecorator.getBtnStyle()}
+    type="button"
+  >
+    <Icon class="h-5" />
+    {buttonDecorator.getButtonText()}
+  </button>
 
-	<Modal {installmentAmount} {id} {installments} {termsAndConditions}>
-		<Button client:load event={event} reseller={reseller} style="primary" type="installment" />
-	</Modal>
+  <Modal
+    installmentAmount={event.getInstallmentAmount()}
+    id={event.getId()}
+    installments={event.getInstallments()}
+    termsAndConditions={event.getTermsAndConditions()}
+  >
+    <Button client:load event={event} reseller={reseller} style="primary" type="installment" />
+  </Modal>
 </section>
