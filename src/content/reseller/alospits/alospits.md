@@ -7,4 +7,7 @@ name: A los Pits
 available: true
 events: ['1']
 primaryAction: installment
+openGraphImage:
+  blob: ./openGraph.png
+  alt: A los Pits x AcuotasApp
 ---

@@ -12,31 +12,25 @@ import ResellerLayout from '@/layouts/ResellerLayout.astro';
 import Events from '@/components/Events.astro';
 import Hero from '@/components/Hero.astro';
 import Whatsapp from '@/components/Whatsapp.astro';
+import { HeadInfo, StaticPath } from '@/env';
+import Head from '@/components/Head.astro';
+
+export async function getStaticPaths(): Promise<StaticPath[]> {
+  return await ResellerRepository.getStaticPaths();
+}
 
 const resellerRepository = new ResellerRepository();
 const eventRepository = new EventRepository();
-
-export function getStaticPaths(): Record<string, any> {
-  const resellerRepository = new ResellerRepository();
-
-  const filterAvaliableVendors = (reseller: CollectionEntry<'reseller'>) => {
-    return reseller.data.available;
-  };
-
-  return resellerRepository.getCollection(filterAvaliableVendors).then((resellers: Reseller[]) => {
-    const ids: string[] = resellers.map((reseller: Reseller): string => reseller.getId());
-
-    return ids.map((id: string): Record<string, any> => ({ params: { slug: id } }));
-  });
-}
 
 const { slug: resellerId } = Astro.params;
 
 const reseller: Reseller = await resellerRepository.getEntry(resellerId);
 const events: Event[] = await eventRepository.getEntries(reseller.getEvents());
+const headInfo: HeadInfo = reseller.getHeadInfo();
 ---
 
-<ResellerLayout reseller={reseller}>
+<ResellerLayout>
+  <Head info={headInfo} slot="head" />
   <Hero reseller={reseller} />
   <Events events={events} reseller={reseller} />
   <Whatsapp reseller={reseller} />

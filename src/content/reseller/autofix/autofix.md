@@ -7,4 +7,7 @@ name: Autofix
 available: true
 events: ['1']
 primaryAction: installment
+openGraphImage:
+  blob: ./logo.webp
+  alt: Autofix x AcuotasApp
 ---

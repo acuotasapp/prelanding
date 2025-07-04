@@ -1,35 +1,20 @@
 ---
 import '@/styles/global.css';
-import Reseller from '@/models/Reseller';
-
-type Props = {
-	reseller: Reseller;
-};
-
-const { reseller }: Props = Astro.props;
-
-// const logo = await import(`${reseller.image.blob}?url`);
 ---
 
 <!doctype html>
 <html lang="es">
-	<head>
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<!-- <meta name="og:image" content={logo.default} /> -->
-		<link rel="sitemap" href="/sitemap-index.xml" />
-
-		<title>{`${reseller.getName()} x Acuotas`}</title>
-	</head>
-	<body class="bg-gray-50 min-h-svh">
-		<div
-			class={`h-full pt-24 pb-20 flex flex-col gap-16 bg-primary-50 w-full max-w-xl overflow-y-auto
+  <head>
+    <slot name="head" />
+  </head>
+  <body class="bg-gray-50 min-h-svh">
+    <div
+      class={`h-full pt-24 pb-20 flex flex-col gap-16 bg-primary-50 w-full max-w-xl overflow-y-auto
 			sm:mx-auto sm:rounded-3xl sm:shadow-lg sm:border sm:border-primary-200 sm:mt-4 sm:mb-24 sm:pb-4`}
-		>
-			<slot />
-		</div>
-		<script is:inline src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"
-		></script>
-	</body>
+    >
+      <slot />
+    </div>
+    <script is:inline src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js">
+    </script>
+  </body>
 </html>

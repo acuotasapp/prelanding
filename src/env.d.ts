@@ -23,3 +23,28 @@ export interface Buttoneable {
   public async createButton(): Promise<void>;
   public getButton(): BtnDecorator;
 }
+
+export type HeadInfo = {
+  url: string;
+  imageUrl: string;
+  title: string;
+  description: string;
+}
+
+export type ImageType = {
+  blob: ImageBlob;
+  alt: string;
+}
+
+export type StaticPath = {
+  params: {
+    slug: string;
+  }
+}
+
+export type ImageBlob = {
+  src: string;
+  width: number;
+  height: number;
+  format: string;
+}
